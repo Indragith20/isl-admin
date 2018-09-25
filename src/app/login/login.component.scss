@@ -1,0 +1,21 @@
+#mydiv {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+ }
+
+ .example-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+.example-container > * {
+  width: 100%;
+}
+
+.buttonStyle{
+    align-items: center;
+    justify-content: center;
+}

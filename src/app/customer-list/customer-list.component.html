@@ -1,0 +1,44 @@
+<!-- <table class="table table-sm">
+  <thead>
+    <th>Full Name</th>
+    <th>Email</th>
+    <th>Mobile</th>
+    <th>Location</th>
+  </thead>
+  <ng-container *ngFor="let customer of customerArray">
+    <tr class="table-dark">
+      <td>{{ customer.fullName }}</td>
+      <td>{{ customer.email }}</td>
+      <td>{{ customer.mobile }}</td>
+      <td>
+        <button class="btn btn-outline-info" (click)="customerService.populateForm(customer)">Edit</button>
+        <button class="btn btn-outline-danger" (click)="customerService.deleteCustomer(customer)">Delete</button>
+      </td>
+    </tr>
+  </ng-container>
+</table> -->
+
+<table class="table table-sm">
+  <thead>
+    <th>Date Created</th>
+    <th>Image URL</th>
+    <th>Source Link</th>
+    <th>Team ID</th>
+    <th>Team Name</th>
+    <th>Title</th>
+  </thead>
+  <ng-container *ngFor="let customer of customerArray">
+    <tr class="table-dark">
+      <td>{{ customer.date_created }}</td>
+      <td>{{ customer.image_url }}</td>
+      <td>{{ customer.source_link }}</td>
+      <td>{{ customer.team_id }}</td>
+      <td>{{ customer.team_name }}</td>
+      <td>{{ customer.title }}</td>
+      <td>
+        <button class="btn btn-outline-info" (click)="customerService.populateForm(customer)">Edit</button>
+        <button class="btn btn-outline-danger" (click)="customerService.deleteCustomer(customer)">Delete</button>
+      </td>
+    </tr>
+  </ng-container>
+</table>

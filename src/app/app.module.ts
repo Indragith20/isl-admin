@@ -15,13 +15,19 @@ import { AuthGuardService } from './shared/auth-guard.service';
 import { AppService } from './shared/app.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { LineupsComponent } from './lineups/lineups.component';
+import { StatsComponent } from './stats/stats.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     AppComponent,
     CustomerComponent,
-    CustomerListComponent
+    CustomerListComponent,
+    LineupsComponent,
+    StatsComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

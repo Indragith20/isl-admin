@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
   signIn() {
     this.loginService.emailLogin(this.username, this.password)
       .then((data) => {
-        console.log(data)
         if(data) {
           console.log(this.loginService.autheticated);
           this.router.navigate(['/news-dashboard']);

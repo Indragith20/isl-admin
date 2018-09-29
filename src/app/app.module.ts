@@ -18,6 +18,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { LineupsComponent } from './lineups/lineups.component';
 import { StatsComponent } from './stats/stats.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule
   ],
-  providers: [CustomerService, AppService, AuthGuardService, AngularFireAuth, AngularFirestore],
+  providers: [CustomerService, AppService, AuthGuardService, AngularFireAuth, AngularFirestore,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

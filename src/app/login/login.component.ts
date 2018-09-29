@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
         console.log(data)
         if(data) {
           console.log(this.loginService.autheticated);
+          this.loginService.getToken();
           this.router.navigate(['/news-dashboard']);
         } else {
           window.alert('Invalid Credentials');

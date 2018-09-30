@@ -15,7 +15,7 @@
   <div class="row" style="margin: 10px; border: 1px solid black">
     <div class="col-md-3"></div>
     <div class="col-md-6" role="group" aria-label="Basic example">
-      <h2>{{selectedMatch.matchParticipants[0].teamName}} And {{selectedMatch.matchParticipants[1].teamName}}</h2> 
+      <h2>{{selectedMatch.matchParticipants[0].teamName}} And {{selectedMatch.matchParticipants[1].teamName}}</h2> - Starting Lineups
     </div>
     <div class="col-md-3"></div>
   </div>
@@ -51,7 +51,8 @@
   </div>
   <div class="row" style="margin-top: 10px;margin-bottom: 10px;">
     <div class="col-md-12 text-center">
-        <button type="button" class="btn btn-success" (click)="submitPlayerList()">Submit</button>
+        <button type="button" class="btn btn-success" [disabled]="buttonDisabled"
+          (click)="details === 'starting' ? submitPlayerList() : submitsubs()">Submit {{details}}</button>
     </div>
   </div>
 </div>

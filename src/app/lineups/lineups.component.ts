@@ -16,6 +16,8 @@ export class LineupsComponent implements OnInit {
   teamTwoDetails: any;
   teamOnePlayerSelected: any;
   teaTwoPlayerSelected: any;
+  details: string = 'starting'
+  buttonDisabled: boolean = false;
 
   constructor(private appService: CustomerService, private datePipe: DatePipe) { }
 
@@ -110,10 +112,46 @@ export class LineupsComponent implements OnInit {
           jerseyNumber: modPlayers.jersey_number
         };
       });
+    const teamString = `${this.teamOneDetails.teamOneName} - ${this.teamTwoDetails.teamTwoName}`
     if (teamOnePlayerSelectedList.length === 11 && teamTwoPlayerSelectedList.length === 11) {
-        this.appService.modifyMatchDetails(this.selectedMatch.matchId, teamOnePlayerSelectedList, teamTwoPlayerSelectedList);
+        this.appService.modifyMatchDetails(this.selectedMatch.matchId, teamOnePlayerSelectedList, teamTwoPlayerSelectedList, teamString);
+        const playerList = this.teamOneDetails.playerList.map((player) => {
+          return { ...player, playerSelected: false }
+        });
+        this.teamOneDetails.playerList = [...playerList];
+        const modplayerList = this.teamTwoDetails.playerList.map((player) => {
+          return { ...player, playerSelected: false }
+        });
+        this.teamTwoDetails.playerList = [...modplayerList];
+        this.details = 'subs';
     } else {
       alert('please select 11 players');
+    }
+  }
+
+
+  submitsubs() {
+    const teamOnePlayerSelectedList = this.teamOneDetails.playerList.filter(player => player.playerSelected === true)
+      .map((modPlayers) => {
+        return {
+          playerName: modPlayers.full_name,
+          role: 'subs',
+          jerseyNumber: modPlayers.jersey_number
+        };
+      });
+    const teamTwoPlayerSelectedList = this.teamTwoDetails.playerList.filter(player => player.playerSelected === true)
+      .map((modPlayers) => {
+        return {
+          playerName: modPlayers.full_name,
+          role: 'subs',
+          jerseyNumber: modPlayers.jersey_number
+        };
+      });
+    if (teamOnePlayerSelectedList.length <= 7 && teamTwoPlayerSelectedList.length <= 7) {
+        this.appService.enterSubs(this.selectedMatch.matchId, teamOnePlayerSelectedList, teamTwoPlayerSelectedList);
+        this.buttonDisabled = true;
+    } else {
+      alert('please select 7 players');
     }
   }
 

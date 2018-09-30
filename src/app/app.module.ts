@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -34,6 +35,7 @@ import { DatePipe } from '@angular/common';
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
     routing,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule

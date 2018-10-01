@@ -12,6 +12,8 @@ export class CustomerService {
 
   customerList: AngularFireList<any>;
   matchList: AngularFireList<any>;
+  teamOne: any;
+  teamtwo: any;
 
   form: FormGroup = new FormGroup({
     $key: new FormControl(null),
@@ -139,7 +141,7 @@ export class CustomerService {
                     finalSnap.ref.push(item);
                 })
             });
-            this.sendNotification(notificationString);
+            this.sendNotification('LineUps Avalibable', notificationString);
         });
     });
   }
@@ -162,10 +164,10 @@ export class CustomerService {
     });
   }
 
-  sendNotification(notificationString: string) {
+  sendNotification(title: string, notificationString: string) {
     let body = {
         "notification":{
-          "title":"LineUps Avalibable",
+          "title":title,
           "body": notificationString,
           "sound":"default",
           "click_action":"FCM_PLUGIN_ACTIVITY",
@@ -185,5 +187,25 @@ export class CustomerService {
       }).subscribe((data) => {
           console.log(data);
       });
+  }
+
+  setGameValues(teamOne, teamTwo) {
+    this.teamOne = teamOne;
+    this.teamtwo = teamTwo;
+  }
+
+  submitStatsData(gameId: string, statsData: any, notificationString: string) {
+    this.firebase.database.ref('matches/matches').orderByChild('game_id').equalTo(gameId).once('value', (snapshot) => {
+        snapshot.forEach((modSnapShot) => {
+            modSnapShot.ref.child('post_stats').once('value', (finalSnap) => {    
+               finalSnap.ref.set(null);
+                statsData.map((item) => {
+                    finalSnap.ref.push(item);
+                });
+            });
+            
+        });
+    });
+    this.sendNotification('Stats Available', notificationString);
   }
 }

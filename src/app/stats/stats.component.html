@@ -1,3 +1,40 @@
-<p>
-  stats works!
-</p>
+<div class="container">
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <h3 class="text-center">Match Stats</h3>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="text-center">Firstname</th>
+            <th class="text-center">Lastname</th>
+            <th class="text-center">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let stats of statsData">
+            <td>
+              <input type="text" class="form-control" [(ngModel)]="stats.teamOne" placeholder="{{stats.stats}}">
+            </td>
+            <td>
+              <h5 class="text-center">{{stats.stats}}</h5>
+            </td>
+            <td>
+              <input type="text" class="form-control" [(ngModel)]="stats.teamTwo" placeholder="{{stats.stats}}">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <button type="button" class="btn btn-success" (click)="submitStats()">Submit Stats</button>
+    </div>
+  </div>
+</div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../shared/customer.service';
 import { DatePipe } from '@angular/common';
 import { mergeMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lineups',
@@ -19,7 +20,7 @@ export class LineupsComponent implements OnInit {
   details: string = 'starting'
   buttonDisabled: boolean = false;
 
-  constructor(private appService: CustomerService, private datePipe: DatePipe) { }
+  constructor(private appService: CustomerService, private datePipe: DatePipe, private router: Router) { }
 
   ngOnInit() {
     this.getMatches();
@@ -153,6 +154,11 @@ export class LineupsComponent implements OnInit {
     } else {
       alert('please select 7 players');
     }
+  }
+
+  goToStatsPage() {
+    this.appService.setGameValues(this.teamOneDetails.teamOneName, this.teamTwoDetails.teamTwoName);
+    this.router.navigate(['/stats', this.selectedMatch.matchId]);
   }
 
 }

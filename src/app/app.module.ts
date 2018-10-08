@@ -20,6 +20,7 @@ import { LineupsComponent } from './lineups/lineups.component';
 import { StatsComponent } from './stats/stats.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DatePipe } from '@angular/common';
+import { EventsComponent } from './events/events.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { DatePipe } from '@angular/common';
     CustomerListComponent,
     LineupsComponent,
     StatsComponent,
-    NavbarComponent
+    NavbarComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,

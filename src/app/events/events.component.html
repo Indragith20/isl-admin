@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <h3 class="text-center">Match Events</h3>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 form-group">
+      <label for="exampleDropdownFormPassword1">Select Event</label>
+      <div class="dropdown">
+        <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          {{selectedEvent}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <button class="dropdown-item disabled" type="button">Select Event</button>
+          <ng-container *ngFor="let event of events">
+            <button class="dropdown-item" type="button" (click)="updateEvent(event.value)">{{event.label}}</button>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 form-group">
+      <label for="exampleDropdownFormPassword1">Select Team</label>
+      <div class="dropdown">
+        <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          {{selectedTeam}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <button class="dropdown-item disabled" type="button">Select Team</button>
+          <ng-container *ngFor="let team of teams">
+            <button class="dropdown-item" type="button" (click)="updateTeam(team.value)">{{team.label}}</button>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 form-group">
+      <label for="exampleDropdownFormPassword1">Select Player</label>
+      <div class="dropdown">
+        <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          {{selectedPlayer}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <button class="dropdown-item disabled" type="button">Select Player</button>
+          <ng-container *ngFor="let event of players">
+            <button class="dropdown-item" type="button" (click)="updatePlayer(event.value)">{{event.label}}</button>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>

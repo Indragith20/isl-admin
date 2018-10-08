@@ -208,4 +208,16 @@ export class CustomerService {
     });
     this.sendNotification('Stats Available', notificationString);
   }
+
+  getStartingLineup(gameId: string) {
+      return new Promise((resolve, reject) => {
+        this.firebase.database.ref('matches/matches').orderByChild('game_id').equalTo(gameId).once('value', (snapshot) => {
+            if(snapshot) {
+                resolve(snapshot.val());
+            } else {
+                reject('No Teams Found');
+            }
+        });
+      });
+  }
 }

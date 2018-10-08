@@ -161,4 +161,9 @@ export class LineupsComponent implements OnInit {
     this.router.navigate(['/stats', this.selectedMatch.matchId]);
   }
 
+  goToEventsPage() {
+    this.appService.setGameValues(this.teamOneDetails.teamOneName, this.teamTwoDetails.teamTwoName);
+    this.router.navigate(['/events', this.selectedMatch.matchId]);
+  }
+
 }

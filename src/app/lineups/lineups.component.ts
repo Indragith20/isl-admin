@@ -29,8 +29,7 @@ export class LineupsComponent implements OnInit {
   getMatches() {
     this.matchDetailsArray = [];
     this.appService.getMatches().then((matchData: any) => {
-      this.matchDetailsArray = matchData.filter(matches => matches.event_status === 'Yet to begin')
-        .map((selectedMatches) => {
+      this.matchDetailsArray = matchData.map((selectedMatches) => {
           return {
             date: this.datePipe.transform(selectedMatches.start_date, 'MM/dd/yyyy'),
             matchParticipants: this.getMatchParticipants(selectedMatches.participants),

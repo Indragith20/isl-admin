@@ -13,11 +13,15 @@ export class EventsComponent implements OnInit {
   gameId: string;
   selectedEvent: string;
   selectedTeam: string;
+  identifiedTeamDetails: any;
   selectedPlayer: string;
   events: any[] = [];
   teams: any[] = [];
   players: any[] = [];
   participants: any[] = [];
+  scoreLine: any;
+  time: any;
+  showLoader: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute, private appService: CustomerService) {
     this.activatedRoute.params.subscribe((data) => {
@@ -86,12 +90,13 @@ export class EventsComponent implements OnInit {
   updateTeam(team) {
     this.selectedTeam = team;
     const identifiedTeam = this.participants.filter(teamDet => teamDet.name === team);
+    this.identifiedTeamDetails = identifiedTeam[0];
     identifiedTeam.map((teams) => {
-        if(teams.players_invloved) {
-          Object.keys(teams.players_invloved).map((playerList: any) => {
+        if(teams.players_involved) {
+          Object.keys(teams.players_involved).map((playerListKey: any) => {
             const player  = {
-              label: playerList.playerName,
-              value: playerList
+              label: teams.players_involved[playerListKey].playerName,
+              value: teams.players_involved[playerListKey]
             };
             this.players.push(player);
           });
@@ -101,6 +106,31 @@ export class EventsComponent implements OnInit {
 
   updatePlayer(player) {
     this.selectedPlayer = player;
+  }
+
+  submit() {
+    this.showLoader = true;
+    const newEvent = {
+      eventName: this.selectedEvent,
+      teamDetails: this.identifiedTeamDetails,
+      playerDetails: this.selectedPlayer,
+      scoreline: this.scoreLine,
+      time: this.time
+    };
+    const notificationString = this.getNotificationString();
+    this.appService.postEventsData(newEvent, notificationString, this.gameId)
+      .then((data) => {
+        this.showLoader = false;
+        console.log(data);
+      }).catch((err) => {
+        console.log(err);
+        this.showLoader = false;
+      });
+  }
+
+  getNotificationString() {
+    const returnString = `${this.teamOne} ${this.scoreLine} ${this.teamTwo}`;
+    return returnString;
   }
 
 }

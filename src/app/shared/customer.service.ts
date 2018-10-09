@@ -220,4 +220,23 @@ export class CustomerService {
         });
       });
   }
+
+  postEventsData(eventsData, notificationString, gameId) {
+      return new Promise((resolve, reject) => {
+        this.firebase.database.ref('matches/matches').orderByChild('game_id').equalTo(gameId).once('value', (snapshot) => {
+            snapshot.forEach((modSnapShot) => {
+                modSnapShot.ref.child('event_timeline').once('value', (finalSnap) => {    
+                    finalSnap.ref.push(eventsData);
+                });
+                modSnapShot.ref.child('event_status').once('value', (snap) => {
+                    snap.ref.set('Started');
+                });
+            });
+            this.sendNotification('Match Update', notificationString);
+            resolve('success')
+        }).catch((err) => {
+            reject('err');
+        });
+      });
+  }
 }

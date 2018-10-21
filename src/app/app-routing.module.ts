@@ -10,10 +10,10 @@ import { EventsComponent } from './events/events.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {path: 'login', component: LoginComponent },
-  { path: 'news-dashboard', component: CustomerComponent },
-  { path: 'lineups', component: LineupsComponent },
-  { path: 'stats/:id', component: StatsComponent },
-  { path: 'events/:id', component: EventsComponent },
+  { path: 'news-dashboard', component: CustomerComponent, canActivate: [AuthGuardService] },
+  { path: 'lineups', component: LineupsComponent, canActivate: [AuthGuardService] },
+  { path: 'stats/:id', component: StatsComponent, canActivate: [AuthGuardService] },
+  { path: 'events/:id', component: EventsComponent, canActivate: [AuthGuardService] },
   {path: '**', redirectTo: 'login'}
 ];
 

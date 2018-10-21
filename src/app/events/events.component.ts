@@ -46,7 +46,7 @@ export class EventsComponent implements OnInit {
       value: 'Match Started'
     }, {
       label: 'Goals',
-      value: 'Goals'
+      value: 'Goal'
     }, {
       label: 'Red Card',
       value: 'Red Card'
@@ -81,9 +81,16 @@ export class EventsComponent implements OnInit {
   }
 
   getPlayersList(matchData) {
-    matchData.map((match) => {
-      this.participants = [...match.participants];
-    });
+    if(matchData.length) {
+      matchData.map((match) => {
+        this.participants = [...match.participants];
+      });
+    } else {
+      Object.keys(matchData).map((match) => {
+        this.participants = [...matchData[match].participants];
+      });
+    }
+    
     console.log(this.participants);
   }
 

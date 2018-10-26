@@ -21,6 +21,11 @@ import { StatsComponent } from './stats/stats.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DatePipe } from '@angular/common';
 import { EventsComponent } from './events/events.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MyOwnCustomMaterialModule } from './app-material.module';
+import { SelectMatchComponent } from './dashboard/select-match/select-match.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DashBoardService } from './shared/dashboard.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +36,9 @@ import { EventsComponent } from './events/events.component';
     LineupsComponent,
     StatsComponent,
     NavbarComponent,
-    EventsComponent
+    EventsComponent,
+    DashboardComponent,
+    SelectMatchComponent
   ],
   imports: [
     BrowserModule,
@@ -40,9 +47,15 @@ import { EventsComponent } from './events/events.component';
     HttpClientModule,
     routing,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    MyOwnCustomMaterialModule,
+    BrowserAnimationsModule
   ],
-  providers: [CustomerService, AppService, AuthGuardService, AngularFireAuth, AngularFirestore,DatePipe],
+  providers: [
+    CustomerService, AppService, AuthGuardService, AngularFireAuth, 
+    AngularFirestore, DatePipe,
+    DashBoardService 
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

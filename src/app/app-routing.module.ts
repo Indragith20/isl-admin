@@ -5,6 +5,8 @@ import { LineupsComponent } from './lineups/lineups.component';
 import { StatsComponent } from './stats/stats.component';
 import { AuthGuardService } from './shared/auth-guard.service';
 import { EventsComponent } from './events/events.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { SelectMatchComponent } from './dashboard/select-match/select-match.component';
 
 
 export const routes: Routes = [
@@ -12,7 +14,15 @@ export const routes: Routes = [
   {path: 'login', component: LoginComponent },
   { path: 'news-dashboard', component: CustomerComponent, canActivate: [AuthGuardService] },
   { path: 'lineups', component: LineupsComponent, canActivate: [AuthGuardService] },
-  { path: 'stats/:id', component: StatsComponent, canActivate: [AuthGuardService] },
+  { 
+    path: 'dashboard', 
+    component: DashboardComponent,
+    children: [
+      { path: '', redirectTo: 'selectmatch', pathMatch: 'full' },
+      { path: 'selectmatch', component: SelectMatchComponent },
+      // { path: 'specs', component: Specs }
+    ]
+  },
   { path: 'events/:id', component: EventsComponent, canActivate: [AuthGuardService] },
   {path: '**', redirectTo: 'login'}
 ];

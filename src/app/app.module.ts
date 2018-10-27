@@ -26,6 +26,7 @@ import { MyOwnCustomMaterialModule } from './app-material.module';
 import { SelectMatchComponent } from './dashboard/select-match/select-match.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashBoardService } from './shared/dashboard.service';
+import { MainDashboardComponent } from './dashboard/main-dashboard/main-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { DashBoardService } from './shared/dashboard.service';
     NavbarComponent,
     EventsComponent,
     DashboardComponent,
-    SelectMatchComponent
+    SelectMatchComponent,
+    MainDashboardComponent
   ],
   imports: [
     BrowserModule,

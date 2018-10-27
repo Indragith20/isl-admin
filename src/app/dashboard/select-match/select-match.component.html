@@ -9,10 +9,26 @@
         <mat-card-content>
           <div class="example-container">
             <mat-form-field>
-              <input matInput [matDatepicker]="myDatepicker" disabled>
+              <input matInput [matDatepicker]="myDatepicker" (dateChange)="addEvent($event)">
               <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
               <mat-datepicker #myDatepicker></mat-datepicker>
             </mat-form-field>
+            <mat-card>
+              <mat-card-content class="text-center">
+                <p *ngIf="!showMatch">{{warningMessage}}</p>
+                <ng-container *ngIf="showMatch && matchDetails.participants">
+                  <p *ngFor="let match of matchDetails.participants; let i = index">
+                    <mat-label>
+                      <b>{{match.name}}</b>
+                    </mat-label>
+                    <mat-label *ngIf="i < matchDetails.participants.length - 1"> 
+                        <p>Vs</p>
+                    </mat-label>
+                  </p>
+                  <p>{{matchDetails.venue_name}}</p>
+                </ng-container>
+              </mat-card-content>
+            </mat-card>
           </div>
         </mat-card-content>
         <mat-card-footer>
@@ -20,7 +36,7 @@
             <div class="row">
               <div class="col-md-4"></div>
               <div class="col-md-4" style="display: flex;align-items: center;justify-content: center">
-                  <button mat-raised-button (click)="getMatchData()">
+                  <button mat-raised-button (click)="showDashboard()" [disabled]="!showMatch">
                     Proceed
                   </button>
               </div>

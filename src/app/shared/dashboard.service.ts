@@ -4,15 +4,18 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class DashBoardService {
+    selectedMatchDetails: any;
     constructor(private db:AngularFireDatabase, private http: HttpClient ) { }
 
     getMatchByDate(date: string) {
         return new Promise((resolve, reject) => {
             const query = this.db.database.ref('matches/matches').orderByChild('start_date').equalTo(date);
-            query.on('value', (snapshot) => {
+            query.once('value', (snapshot) => {
                 if(snapshot) {
-                    console.log(snapshot.val());
-                    resolve(snapshot.val());
+                    snapshot.forEach((childSnapshot) => {
+                        this.selectedMatchDetails = childSnapshot.val();
+                        resolve(childSnapshot.val());
+                    });
                 } else {
                     reject('err')
                 }

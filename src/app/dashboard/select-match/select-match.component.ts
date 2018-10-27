@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { DashBoardService } from 'src/app/shared/dashboard.service';
 import { MatDatepickerInputEvent } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-select-match',
@@ -10,7 +11,12 @@ import { MatDatepickerInputEvent } from '@angular/material';
 })
 export class SelectMatchComponent implements OnInit {
   selectedDate: Date;
-  constructor(private datePipe: DatePipe, private dashboardService: DashBoardService) { }
+  showMatch: boolean = false;
+  warningMessage: string = 'Please Select the Date';
+  matchDetails: any;
+
+  constructor(private datePipe: DatePipe, private dashboardService: DashBoardService,
+      private router: Router) { }
 
   ngOnInit() {
   }
@@ -26,11 +32,18 @@ export class SelectMatchComponent implements OnInit {
     console.log(searchDateString);
     this.dashboardService.getMatchByDate(searchDateString)
       .then((data) => {
+        this.showMatch = true;
+        this.matchDetails = data;      
         console.log(data);
       })
       .catch((err) => {
         console.log(err);
+        this.warningMessage = 'Something Bad Happened..Please Try Again'
       });
+  }
+
+  showDashboard() {
+    this.router.navigate(['dashboard/main-dashboard']);  
   }
 
 }

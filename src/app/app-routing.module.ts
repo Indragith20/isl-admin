@@ -7,6 +7,7 @@ import { AuthGuardService } from './shared/auth-guard.service';
 import { EventsComponent } from './events/events.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SelectMatchComponent } from './dashboard/select-match/select-match.component';
+import { MainDashboardComponent } from './dashboard/main-dashboard/main-dashboard.component';
 
 
 export const routes: Routes = [
@@ -20,11 +21,11 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'selectmatch', pathMatch: 'full' },
       { path: 'selectmatch', component: SelectMatchComponent },
-      // { path: 'specs', component: Specs }
+      { path: 'main-dashboard', component: MainDashboardComponent }
     ]
   },
   { path: 'events/:id', component: EventsComponent, canActivate: [AuthGuardService] },
-  {path: '**', redirectTo: 'login'}
+  // {path: '**', redirectTo: 'login'}
 ];
 
 export const appRoutingProviders: any[] = [

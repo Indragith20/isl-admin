@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
 import { ITeamList } from 'src/app/interfaces/team-list.interface';
 import { IPlayerList } from 'src/app/interfaces/player-list.interface';
+import { PlayerListComponent } from 'src/app/player-list/player-list.component';
 
 @Component({
   selector: 'app-team-one',
@@ -15,6 +16,9 @@ export class TeamOneComponent implements OnInit {
       this.playerList = team.playerList;
     }
   }
+  @Output() teamOnePlayerList = new EventEmitter<IPlayerList[]>();
+  @ViewChild('starting') startPlayerList: PlayerListComponent;
+  @ViewChild('subs') subsPlayerList: PlayerListComponent;
   teamList: ITeamList;
   playerList: IPlayerList[];
 
@@ -23,4 +27,20 @@ export class TeamOneComponent implements OnInit {
   ngOnInit() {
   }
 
+  submitTeam() {
+    if(this.startPlayerList && this.subsPlayerList) {
+      const startingLineups = this.startPlayerList.playerList.filter((player) => {
+        if(player.playerSelected && player.playerRole === 'starting') {
+          return player;
+        }
+      });
+      const substitutes = this.subsPlayerList.playerList.filter((player) => {
+        if(player.playerSelected && player.playerRole === 'subs') {
+          return player;
+        }
+      });
+      const teamOneList: IPlayerList[] = [...startingLineups, ...substitutes];
+      this.teamOnePlayerList.emit(teamOneList);
+    }
+  }
 }

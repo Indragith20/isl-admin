@@ -8,7 +8,7 @@
                   <b>{{teamOne ? teamOne.teamName : 'Team One'}}</b>
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <app-team-one [teamDetails]="teamOne"></app-team-one>
+              <app-team-one [teamDetails]="teamOne" (teamOnePlayerList)="submitTeamOnePlayerList($event)"></app-team-one>
             </mat-expansion-panel>
           </mat-accordion>
     </div>
@@ -22,7 +22,7 @@
                     <b>{{teamTwo ? teamTwo.teamName : 'Team Two'}}</b>
                   </mat-panel-title>
                 </mat-expansion-panel-header>
-                <app-team-two [teamDetails]="teamTwo"></app-team-two>
+                <app-team-two [teamDetails]="teamTwo" (teamTwoPlayerList)="submitTeamTwoPlayerList($event)"></app-team-two>
               </mat-expansion-panel>
             </mat-accordion>
       </div>

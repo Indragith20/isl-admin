@@ -1,10 +1,15 @@
 <div class="container">
+    <div class="row">
     <mat-toolbar color="warn">
         <span>Choose Starting Lineup</span>
     </mat-toolbar>
-    <app-player-list [playerList]="playerList"></app-player-list>
+    <app-player-list #starting [playerList]="playerList" [playerRole]="'starting'"></app-player-list>
     <mat-toolbar color="warn" style="margin-top: 10px">
         <span>Choose Substitues</span>
     </mat-toolbar>
-    <app-player-list [playerList]="playerList"></app-player-list>
+    <app-player-list #subs [playerList]="playerList" [playerRole]="'subs'"></app-player-list>
+    </div>
+    <div class="row" style="margin-top: 20px">
+        <button mat-raised-button (click)="submitTeam()">Submit Team</button>
+    </div>
 </div>

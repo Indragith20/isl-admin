@@ -1,5 +1,5 @@
 <ng-container *ngFor="let player of playerList">
-    <div [ngClass]="{'imageSelectedStyle': player.jersey_number === selectedPlayer, 'imageDefaultStyle': player.jersey_number!==selectedPlayer}"
+    <div [ngClass]="{'imageSelectedStyle': player.playerSelected && player.playerRole === playerRole, 'imageDefaultStyle': !player.playerSelected || player.playerRole !== playerRole}"
         (click)="selectPlayer(player)" matTooltip="{{player.full_name}}">
         {{player.jersey_number}}
     </div>

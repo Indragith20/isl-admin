@@ -27,6 +27,12 @@ import { SelectMatchComponent } from './dashboard/select-match/select-match.comp
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashBoardService } from './shared/dashboard.service';
 import { MainDashboardComponent } from './dashboard/main-dashboard/main-dashboard.component';
+import { LineUpsComponent } from './dashboard/line-ups/line-ups.component';
+import { MatchEventsComponent } from './dashboard/match-events/match-events.component';
+import { MatchStatsComponent } from './dashboard/match-stats/match-stats.component';
+import { PlayerListComponent } from './player-list/player-list.component';
+import { TeamOneComponent } from './dashboard/team-one/team-one.component';
+import { TeamTwoComponent } from './dashboard/team-two/team-two.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +46,13 @@ import { MainDashboardComponent } from './dashboard/main-dashboard/main-dashboar
     EventsComponent,
     DashboardComponent,
     SelectMatchComponent,
-    MainDashboardComponent
+    MainDashboardComponent,
+    LineUpsComponent,
+    MatchEventsComponent,
+    MatchStatsComponent,
+    PlayerListComponent,
+    TeamOneComponent,
+    TeamTwoComponent
   ],
   imports: [
     BrowserModule,

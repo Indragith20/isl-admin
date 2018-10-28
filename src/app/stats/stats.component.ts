@@ -14,7 +14,7 @@ export class StatsComponent implements OnInit {
   gameId: string;
 
   constructor(private activatedRoute: ActivatedRoute, private appService: CustomerService) { 
-    this.activatedRoute.params.subscribe((data) => {
+    /* this.activatedRoute.params.subscribe((data) => {
       console.log(data);
       this.gameId = data.id;
       console.log(this.appService.teamOne);
@@ -22,7 +22,7 @@ export class StatsComponent implements OnInit {
       this.teamOne = this.appService.teamOne ? this.appService.teamOne : 'teamOne';
       this.teamTwo = this.appService.teamtwo ? this.appService.teamtwo : 'teamTwo';
     });
-    this.formStats();
+    this.formStats(); */
   }
 
   ngOnInit() {

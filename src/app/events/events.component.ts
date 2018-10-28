@@ -24,7 +24,7 @@ export class EventsComponent implements OnInit {
   showLoader: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute, private appService: CustomerService) {
-    this.activatedRoute.params.subscribe((data) => {
+    /* this.activatedRoute.params.subscribe((data) => {
       console.log(data);
       this.gameId = data.id;
       console.log(this.appService.teamOne);
@@ -70,13 +70,13 @@ export class EventsComponent implements OnInit {
       label: this.teamTwo,
       value: this.teamTwo
     }];
-    this.players = [];
+    this.players = []; */
   }
 
   ngOnInit() {
   }
 
-  updateEvent(event) {
+  /* updateEvent(event) {
     this.selectedEvent = event;
   }
 
@@ -138,6 +138,6 @@ export class EventsComponent implements OnInit {
   getNotificationString() {
     const returnString = `${this.teamOne} ${this.scoreLine} ${this.teamTwo}`;
     return returnString;
-  }
+  } */
 
 }

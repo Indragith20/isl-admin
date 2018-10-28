@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { HttpClient } from '@angular/common/http';
+import { IMatchDetails } from '../interfaces/match-details.interface';
 
 @Injectable()
 export class DashBoardService {
-    selectedMatchDetails: any;
-    constructor(private db:AngularFireDatabase, private http: HttpClient ) { }
+    selectedMatchDetails: IMatchDetails;
+    constructor(private db: AngularFireDatabase, private http: HttpClient ) { }
 
     getMatchByDate(date: string) {
         return new Promise((resolve, reject) => {
@@ -17,7 +18,7 @@ export class DashBoardService {
                         resolve(childSnapshot.val());
                     });
                 } else {
-                    reject('err')
+                    reject('err');
                 }
             });
         });

@@ -2,18 +2,20 @@ import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { ITeamList } from '../interfaces/team-list.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
 
-  constructor(private firebase:AngularFireDatabase, private http: HttpClient ) { }
+  constructor(private firebase: AngularFireDatabase, private http: HttpClient ) { }
 
   customerList: AngularFireList<any>;
   matchList: AngularFireList<any>;
-  teamOne: any;
-  teamtwo: any;
+  teamOne: ITeamList;
+  teamtwo: ITeamList;
 
   form: FormGroup = new FormGroup({
     $key: new FormControl(null),
@@ -68,8 +70,7 @@ export class CustomerService {
                     const value = snapshot.val();
                     if(value === null) {
                         resolveArray = null;
-                    }
-                    else if(value !== null && value.length) {
+                    } else if(value !== null && value.length) {
                         resolveArray = [...value];
                     } else {
                         Object.keys(value).map((key) => {
@@ -84,45 +85,44 @@ export class CustomerService {
             });
     });
   }
-  
-  getPlayerDetails(teamId) {
+
+  getPlayerDetails(teamId): Observable<{}[]> {
     let localTeamId = '';
-    let localTeamDetails = {};
     switch(teamId) {
-        case '499': 
+        case '499':
             localTeamId = '1';
           break;
-        case '656': 
+        case '656':
             localTeamId = '2';
             break;
-        case '505': 
+        case '505':
             localTeamId = '3';
             break;
-        case '500': 
+        case '500':
             localTeamId = '4';
             break;
-        case '496': 
+        case '496':
             localTeamId = '5';
             break;
-        case '501': 
+        case '501':
             localTeamId = '6';
             break;
-        case '1159': 
+        case '1159':
             localTeamId = '7';
             break;
-        case '498': 
+        case '498':
             localTeamId = '8';
             break;
-        case '506': 
+        case '506':
             localTeamId = '9';
             break;
-        case '504': 
+        case '504':
             localTeamId = '10';
             break;
         default:
             break;
     }
-    return this.firebase.list('teamDetailsById/'+localTeamId).valueChanges();
+    return this.firebase.list('teamDetailsById/' + localTeamId).valueChanges();
   }
 
   modifyMatchDetails(gameId, playerOneList, playerTwoList, notificationString) {
@@ -132,14 +132,13 @@ export class CustomerService {
                 finalSnap.ref.set(null);
                 playerOneList.map((item) => {
                     finalSnap.ref.push(item);
-                })
-                
+                });
             });
             modSnapShot.ref.child('participants/1/players_involved').once('value', (finalSnap) => {
                 finalSnap.ref.set(null);
                 playerTwoList.map((item) => {
                     finalSnap.ref.push(item);
-                })
+                });
             });
             this.sendNotification('LineUps Avalibable', notificationString);
         });
@@ -152,37 +151,37 @@ export class CustomerService {
             modSnapShot.ref.child('participants/0/players_involved').once('value', (finalSnap) => {
                 playerOneList.map((item) => {
                     finalSnap.ref.push(item);
-                })
-                
+                });
             });
             modSnapShot.ref.child('participants/1/players_involved').once('value', (finalSnap) => {
                 playerTwoList.map((item) => {
                     finalSnap.ref.push(item);
-                })
+                });
             });
         });
     });
   }
 
   sendNotification(title: string, notificationString: string) {
-    let body = {
-        "notification":{
-          "title":title,
-          "body": notificationString,
-          "sound":"default",
-          "click_action":"FCM_PLUGIN_ACTIVITY",
-          "icon":"fcm_push_icon"
+    const body = {
+        'notification': {
+          'title': title,
+          'body': notificationString,
+          'sound': 'default',
+          'click_action': 'FCM_PLUGIN_ACTIVITY',
+          'icon': 'fcm_push_icon'
         },
-        "data":{
-          "param1":"value1",
-          "param2":"value2"
+        'data': {
+          'param1': 'value1',
+          'param2': 'value2'
         },
-          "to":"/topics/all",
-          "priority":"high",
-          "restricted_package_name":""
-      }
-      let options = new HttpHeaders().set('Content-Type','application/json');
-      this.http.post("https://fcm.googleapis.com/fcm/send",body,{
+          'to': '/topics/all',
+          'priority': 'high',
+          'restricted_package_name': ''
+      };
+      const options = new HttpHeaders().set('Content-Type', 'application/json');
+      this.http.post('https://fcm.googleapis.com/fcm/send', body, {
+        // tslint:disable-next-line:max-line-length
         headers: options.set('Authorization', 'key=AAAALka8P8g:APA91bGxsB0udcit9rSG7y8t2w1L6DSclnP308onGF_aV1S7_aoMTxu1TwfygR-Ezc_jKrLXQ854PbfI_QFd-cmVEyo9q3Ce02-7bNkJwjr8VMBro1XKb5epyBPnuBijixa210IjZiFy'),
       }).subscribe((data) => {
           console.log(data);
@@ -197,13 +196,12 @@ export class CustomerService {
   submitStatsData(gameId: string, statsData: any, notificationString: string) {
     this.firebase.database.ref('matches/matches').orderByChild('game_id').equalTo(gameId).once('value', (snapshot) => {
         snapshot.forEach((modSnapShot) => {
-            modSnapShot.ref.child('post_stats').once('value', (finalSnap) => {    
+            modSnapShot.ref.child('post_stats').once('value', (finalSnap) => {
                finalSnap.ref.set(null);
                 statsData.map((item) => {
                     finalSnap.ref.push(item);
                 });
             });
-            
         });
     });
     this.sendNotification('Stats Available', notificationString);
@@ -225,7 +223,7 @@ export class CustomerService {
       return new Promise((resolve, reject) => {
         this.firebase.database.ref('matches/matches').orderByChild('game_id').equalTo(gameId).once('value', (snapshot) => {
             snapshot.forEach((modSnapShot) => {
-                modSnapShot.ref.child('event_timeline').once('value', (finalSnap) => {    
+                modSnapShot.ref.child('event_timeline').once('value', (finalSnap) => {
                     finalSnap.ref.push(eventsData);
                 });
                 modSnapShot.ref.child('event_status').once('value', (snap) => {
@@ -233,7 +231,7 @@ export class CustomerService {
                 });
             });
             this.sendNotification('Match Update', notificationString);
-            resolve('success')
+            resolve('success');
         }).catch((err) => {
             reject('err');
         });

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IPlayerList } from '../interfaces/player-list.interface';
+import { IPlayerList } from 'src/app/interfaces/player-list.interface';
+
 
 @Component({
   selector: 'app-player-list',

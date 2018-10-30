@@ -30,9 +30,9 @@ import { MainDashboardComponent } from './dashboard/main-dashboard/main-dashboar
 import { LineUpsComponent } from './dashboard/line-ups/line-ups.component';
 import { MatchEventsComponent } from './dashboard/match-events/match-events.component';
 import { MatchStatsComponent } from './dashboard/match-stats/match-stats.component';
-import { PlayerListComponent } from './player-list/player-list.component';
 import { TeamOneComponent } from './dashboard/team-one/team-one.component';
 import { TeamTwoComponent } from './dashboard/team-two/team-two.component';
+import { PlayerListComponent } from './shared/components/player-list/player-list.component';
 
 @NgModule({
   declarations: [
@@ -66,9 +66,9 @@ import { TeamTwoComponent } from './dashboard/team-two/team-two.component';
     BrowserAnimationsModule
   ],
   providers: [
-    CustomerService, AppService, AuthGuardService, AngularFireAuth, 
+    CustomerService, AppService, AuthGuardService, AngularFireAuth,
     AngularFirestore, DatePipe,
-    DashBoardService 
+    DashBoardService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,5 @@
 .imageDefaultStyle {
-    background:url(../../assets/icons/Jersey_white.svg.png) no-repeat center;
+    background:url(../../../../assets/icons/Jersey_white.svg.png) no-repeat center;
     background-size:cover;
     text-align:center;
     height: 40px;
@@ -11,7 +11,7 @@
 }
 
 .imageSelectedStyle {
-    background: url(../../assets/icons/Jersey_Brown.svg.png) no-repeat center;
+    background: url(../../../../assets/icons/Jersey_Brown.svg.png) no-repeat center;
     background-size:cover;
     text-align:center;
     color: white;

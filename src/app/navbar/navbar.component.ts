@@ -9,14 +9,13 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private appService: AppService,private router:Router) { 
-    
+  constructor(private appService: AppService, private router: Router) {
   }
 
   ngOnInit() {
     this.isAuthenticated();
   }
-  
+
   isAuthenticated() {
     return this.appService.autheticated;
   }

@@ -1,31 +1,38 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-        <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title style="text-transform: capitalize; text-align: center; font-size: 16px">
-                  <b>{{teamOne ? teamOne.teamName : 'Team One'}}</b>
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <app-team-one [teamDetails]="teamOne" (teamOnePlayerList)="submitTeamOnePlayerList($event)"></app-team-one>
-            </mat-expansion-panel>
-          </mat-accordion>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title style="text-transform: capitalize; text-align: center; font-size: 16px">
+              <b>{{teamOne ? teamOne.teamName : 'Team One'}}</b>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-team-one [teamDetails]="teamOne" (teamOnePlayerList)="submitTeamOnePlayerList($event)"></app-team-one>
+        </mat-expansion-panel>
+      </mat-accordion>
     </div>
   </div>
   <div class="row" style="margin-top: 20px">
-      <div class="col-md-12">
-          <mat-accordion>
-              <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                  <mat-panel-title style="text-transform: capitalize; text-align: center; font-size: 16px">
-                    <b>{{teamTwo ? teamTwo.teamName : 'Team Two'}}</b>
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-                <app-team-two [teamDetails]="teamTwo" (teamTwoPlayerList)="submitTeamTwoPlayerList($event)"></app-team-two>
-              </mat-expansion-panel>
-            </mat-accordion>
-      </div>
+    <div class="col-md-12">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title style="text-transform: capitalize; text-align: center; font-size: 16px">
+              <b>{{teamTwo ? teamTwo.teamName : 'Team Two'}}</b>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-team-two [teamDetails]="teamTwo" (teamTwoPlayerList)="submitTeamTwoPlayerList($event)"></app-team-two>
+        </mat-expansion-panel>
+      </mat-accordion>
     </div>
+  </div>
+  <div class="row" style="margin-top: 20px">
+    <div class="col-md-12">
+      <button mat-raised-button [disabled]="!teamOnePlayerListSubmitted || !teamTwoPlayerListSubmitted" (click)="sendNotification()">
+        Send Notification
+      </button>
+    </div>
+  </div>
 
 </div>

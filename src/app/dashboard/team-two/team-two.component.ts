@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
 import { ITeamList } from 'src/app/interfaces/team-list.interface';
 import { IPlayerList } from 'src/app/interfaces/player-list.interface';
-import { PlayerListComponent } from 'src/app/player-list/player-list.component';
+import { PlayerListComponent } from 'src/app/shared/components/player-list/player-list.component';
+
 
 @Component({
   selector: 'app-team-two',

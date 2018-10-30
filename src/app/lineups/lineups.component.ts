@@ -17,16 +17,16 @@ export class LineupsComponent implements OnInit {
   teamTwoDetails: any;
   teamOnePlayerSelected: any;
   teaTwoPlayerSelected: any;
-  details: string = 'starting'
+  details: string = 'starting';
   buttonDisabled: boolean = false;
 
   constructor(private appService: CustomerService, private datePipe: DatePipe, private router: Router) { }
 
   ngOnInit() {
-    this.getMatches();
+    /* this.getMatches(); */
   }
 
-  getMatches() {
+  /* getMatches() {
     this.matchDetailsArray = [];
     this.appService.getMatches().then((matchData: any) => {
       this.matchDetailsArray = matchData.map((selectedMatches) => {
@@ -163,6 +163,6 @@ export class LineupsComponent implements OnInit {
   goToEventsPage() {
     this.appService.setGameValues(this.teamOneDetails.teamOneName, this.teamTwoDetails.teamTwoName);
     this.router.navigate(['/events', this.selectedMatch.matchId]);
-  }
+  } */
 
 }

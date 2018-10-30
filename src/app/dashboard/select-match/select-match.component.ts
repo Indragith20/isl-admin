@@ -82,9 +82,9 @@ export class SelectMatchComponent implements OnInit {
         let playerRole: string = '';
         Object.keys(this.matchDetails.participants[index].players_involved).forEach((keyName) => {
           const existingPlayerList = this.matchDetails.participants[index].players_involved;
-          if(existingPlayerList[keyName].jerseyNumber === searchPlayer.jersey_number) {
+          if(existingPlayerList[keyName].jersey_number === searchPlayer.jersey_number) {
             playerFound = true;
-            playerRole = existingPlayerList[keyName].role;
+            playerRole = existingPlayerList[keyName].playerRole;
           }
         });
         formattedPlayers.push({...searchPlayer, playerSelected: playerFound, playerRole: playerRole});

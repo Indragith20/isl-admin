@@ -193,18 +193,24 @@ export class CustomerService {
     this.teamtwo = teamTwo;
   }
 
-  submitStatsData(gameId: string, statsData: any, notificationString: string) {
-    this.firebase.database.ref('matches/matches').orderByChild('game_id').equalTo(gameId).once('value', (snapshot) => {
-        snapshot.forEach((modSnapShot) => {
-            modSnapShot.ref.child('post_stats').once('value', (finalSnap) => {
-               finalSnap.ref.set(null);
-                statsData.map((item) => {
-                    finalSnap.ref.push(item);
+  submitStatsData(gameId: string, statsData: any) {
+      return new Promise((resolve, reject) => {
+        this.firebase.database.ref('matches/matches').orderByChild('game_id').equalTo(gameId).once('value', (snapshot) => {
+            if(snapshot) {
+                snapshot.forEach((modSnapShot) => {
+                    modSnapShot.ref.child('post_stats').once('value', (finalSnap) => {
+                       finalSnap.ref.set(null);
+                        statsData.map((item) => {
+                            finalSnap.ref.push(item);
+                        });
+                        resolve('success');
+                    });
                 });
-            });
+            } else {
+                reject('err');
+            }
         });
-    });
-    this.sendNotification('Stats Available', notificationString);
+      });
   }
 
   getStartingLineup(gameId: string) {

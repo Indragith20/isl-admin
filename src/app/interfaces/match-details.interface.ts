@@ -32,7 +32,7 @@ export interface IParticipants {
     short_name?: string;
     id?: string;
     value?: string;
-    players_involved?: IPlayersInvolved[]
+    players_involved?: IPlayersInvolved[];
 }
 
 export interface IPlayersInvolved {

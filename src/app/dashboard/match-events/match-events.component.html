@@ -1,3 +1,40 @@
-<p>
-  match-events works!
-</p>
+<div class="container">
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <h3 class="text-center">Match Events</h3>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-md-12">
+      <app-main-timer></app-main-timer>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 20px;">
+    <div class="col-md-6">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title style="text-transform: capitalize; text-align: center; font-size: 16px">
+              <b>{{teamOneName ? teamOneName : 'Team One'}}</b>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-team-events [teamId]="1" [cardDetails]="events"></app-team-events>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="col-md-6">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title style="text-transform: capitalize; font-size: 16px">
+              <b>{{teamTwoName ? teamTwoName : 'Team Two'}}</b>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-team-events [teamId]="2" [cardDetails]="events"></app-team-events>
+        </mat-expansion-panel>
+      </mat-accordion>
+      </div>
+  </div>
+</div>

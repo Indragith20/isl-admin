@@ -18,7 +18,7 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
           <button class="dropdown-item disabled" type="button">Select Event</button>
           <ng-container *ngFor="let event of events">
-            <button class="dropdown-item" type="button" (click)="updateEvent(event.value)">{{event.label}}</button>
+            <!-- <button class="dropdown-item" type="button" (click)="updateEvent(event.value)">{{event.label}}</button> -->
           </ng-container>
         </div>
       </div>
@@ -37,7 +37,7 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
           <button class="dropdown-item disabled" type="button">Select Team</button>
           <ng-container *ngFor="let team of teams">
-            <button class="dropdown-item" type="button" (click)="updateTeam(team.value)">{{team.label}}</button>
+            <!-- <button class="dropdown-item" type="button" (click)="updateTeam(team.value)">{{team.label}}</button> -->
           </ng-container>
         </div>
       </div>
@@ -51,12 +51,12 @@
       <div class="dropdown">
         <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          {{selectedPlayer.playerName ? selectedPlayer.playerName : selectedPlayer}}
+          <!-- {{selectedPlayer.playerName ? selectedPlayer.playerName : selectedPlayer}} -->
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
           <button class="dropdown-item disabled" type="button">Select Player</button>
           <ng-container *ngFor="let player of players">
-            <button class="dropdown-item" type="button" (click)="updatePlayer(player.value)">{{player.label}}</button>
+            <!-- <button class="dropdown-item" type="button" (click)="updatePlayer(player.value)">{{player.label}}</button> -->
           </ng-container>
         </div>
       </div>
@@ -82,7 +82,7 @@
   <div class="row" style="margin-top: 10px;">
     <div class="col-md-4"></div>
     <div class="col-md-4">
-      <button class="btn btn-outline-success" (click)="submit()">Submit</button>
+      <!-- <button class="btn btn-outline-success" (click)="submit()">Submit</button> -->
     </div>
     <div class="col-md-4"></div>
   </div>

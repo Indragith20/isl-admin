@@ -1,0 +1,14 @@
+.cardNormalStyle {
+    display: flex;
+    height: 140px;
+    font-size: 15px;
+    font-weight: bold;
+    width: 100%;
+    border: 1px solid grey;
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+    transition: 1s;
+    color: lightslategrey;
+    cursor: pointer;
+}

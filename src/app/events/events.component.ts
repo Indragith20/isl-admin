@@ -90,7 +90,7 @@ export class EventsComponent implements OnInit {
         this.participants = [...matchData[match].participants];
       });
     }
-    
+
     console.log(this.participants);
   }
 

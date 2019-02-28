@@ -11,7 +11,7 @@
             <mat-form-field>
               <input matInput [matDatepicker]="myDatepicker" (dateChange)="addEvent($event)">
               <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-              <mat-datepicker #myDatepicker></mat-datepicker>
+              <mat-datepicker [startAt]="selectedDate" #myDatepicker></mat-datepicker>
             </mat-form-field>
             <mat-card>
               <mat-card-content class="text-center">

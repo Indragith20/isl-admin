@@ -32,6 +32,8 @@ import { MatchStatsComponent } from './dashboard/match-stats/match-stats.compone
 import { TeamOneComponent } from './dashboard/team-one/team-one.component';
 import { TeamTwoComponent } from './dashboard/team-two/team-two.component';
 import { PlayerListComponent } from './shared/components/player-list/player-list.component';
+import { MainTimerComponent } from './dashboard/main-timer/main-timer.component';
+import { TeamEventsComponent } from './dashboard/team-events/team-events.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { PlayerListComponent } from './shared/components/player-list/player-list
     MatchStatsComponent,
     PlayerListComponent,
     TeamOneComponent,
-    TeamTwoComponent
+    TeamTwoComponent,
+    MainTimerComponent,
+    TeamEventsComponent
   ],
   imports: [
     BrowserModule,

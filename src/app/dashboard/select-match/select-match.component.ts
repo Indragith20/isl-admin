@@ -22,12 +22,12 @@ export class SelectMatchComponent implements OnInit {
   matchDetails: any;
   teamOne: ITeamList;
   teamTwo: ITeamList;
+  myDatepicker: Date;
 
   constructor(private datePipe: DatePipe, private dashboardService: DashBoardService,
       private router: Router, private appService: CustomerService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   addEvent(event: MatDatepickerInputEvent<Date>) {
     this.selectedDate = event.value;

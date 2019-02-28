@@ -1,0 +1,19 @@
+<form [formGroup]="cardForms">
+  <div class="row">
+    <ng-container *ngFor="let card of formData.controls; let i = index">
+      <ng-container [formGroup]="card">
+        <!-- <div class="col-md-2 col-md-offset-12 cardNormalStyle" (click)="open(content, card)"> -->
+        <div class="col-md-2 col-md-offset-12 cardNormalStyle" matTooltip="{{card.get('title').value}}" (click)="openDialog(card)">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <img src="{{card.get('icon').value}}" alt="image" height=50 width=50/>
+            </div>
+            <div class="col-md-12 text-center">
+              {{card.get('title').value}}
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</form>

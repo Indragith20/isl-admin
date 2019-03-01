@@ -34,9 +34,11 @@ import { TeamTwoComponent } from './dashboard/team-two/team-two.component';
 import { PlayerListComponent } from './shared/components/player-list/player-list.component';
 import { MainTimerComponent } from './dashboard/main-timer/main-timer.component';
 import { TeamEventsComponent } from './dashboard/team-events/team-events.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
+    SidebarComponent,
     LoginComponent,
     AppComponent,
     CustomerComponent,

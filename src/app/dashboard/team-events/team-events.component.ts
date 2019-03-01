@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
+import { IPlayerList } from 'src/app/interfaces/player-list.interface';
 
 @Component({
   selector: 'app-team-events',
@@ -14,7 +15,9 @@ export class TeamEventsComponent implements OnInit {
       this.intializeFormValues();
     }
   }
+  @Input() players: IPlayerList[];
   @Input() teamId: string;
+  @Input() teamName: string;
   modalContent: FormGroup;
 
   get formData() { return <FormArray>this.cardForms.get('cards'); }

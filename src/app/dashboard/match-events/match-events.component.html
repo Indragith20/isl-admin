@@ -20,7 +20,8 @@
               <b>{{teamOneName ? teamOneName : 'Team One'}}</b>
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <app-team-events [teamId]="1" [cardDetails]="events"></app-team-events>
+          <app-team-events [teamId]="teamOneId" [cardDetails]="events" 
+            [teamName]="teamOneName" [players]="teamOnePlayersList"></app-team-events>
         </mat-expansion-panel>
       </mat-accordion>
     </div>
@@ -32,7 +33,8 @@
               <b>{{teamTwoName ? teamTwoName : 'Team Two'}}</b>
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <app-team-events [teamId]="2" [cardDetails]="events"></app-team-events>
+          <app-team-events [teamId]="teamTwoId" [cardDetails]="events" 
+            [teamName]="teamTwoName" [players]="teamTwoPlayersList"></app-team-events>
         </mat-expansion-panel>
       </mat-accordion>
       </div>

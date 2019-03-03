@@ -17,7 +17,6 @@ import { AppService } from './shared/app.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { LineupsComponent } from './lineups/lineups.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { DatePipe } from '@angular/common';
 import { EventsComponent } from './events/events.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -44,7 +43,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     CustomerComponent,
     CustomerListComponent,
     LineupsComponent,
-    NavbarComponent,
     EventsComponent,
     DashboardComponent,
     SelectMatchComponent,

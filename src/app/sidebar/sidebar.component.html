@@ -3,7 +3,7 @@
     <button *ngIf="isAuthenticated" mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <h1 class="example-app-name" *ngIf="isAuthenticated">{{title}}</h1>
+    <h1 class="example-app-name">{{title}}</h1>
     <h1 class="example-action-name">{{isAuthenticated ? 'Logout': 'Login'}}</h1>
   </mat-toolbar>
   <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">

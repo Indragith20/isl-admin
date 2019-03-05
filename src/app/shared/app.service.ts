@@ -14,7 +14,10 @@ import { BehaviorSubject } from 'rxjs';
 export class AppService {
     //autheticated: boolean = false;
     private autheticationSource = new BehaviorSubject(false);
+    private pageTitleSource = new BehaviorSubject<string>('ISL Admin');
     autheticated = this.autheticationSource.asObservable();
+    pageTitle = this.pageTitleSource.asObservable();
+    
     token: string;
 
     constructor(private afAuth: AngularFireAuth,
@@ -47,6 +50,10 @@ export class AppService {
 
     updateAuthenticationData(data: boolean) {
         this.autheticationSource.next(data);
+    }
+
+    updatePageTitle(title: string) {
+        this.pageTitleSource.next(title);
     }
 
 }

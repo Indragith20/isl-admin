@@ -16,6 +16,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   title: string = 'ISL Admin'
   isAuthenticated: boolean;
   authenticationSubscription: Subscription;
+  titleSubscription: Subscription;
   private _mobileQueryListener: () => void;
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
@@ -28,6 +29,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.authenticationSubscription = this.appService.autheticated.subscribe((autheticatedValue) => {
       this.isAuthenticated = autheticatedValue;
+    });
+    this.titleSubscription = this.appService.pageTitle.subscribe((pageTitleValue: string) => {
+      this.title = pageTitleValue;
     });
   }
 

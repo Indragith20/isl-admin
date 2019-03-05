@@ -1,0 +1,10 @@
+.actionStyle {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.headingStyle {
+    padding: 5px;
+    color: white;
+}

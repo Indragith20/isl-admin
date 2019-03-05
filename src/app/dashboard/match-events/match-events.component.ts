@@ -26,7 +26,7 @@ export class MatchEventsComponent implements OnInit {
 
   constructor(private appService: CustomerService, private dashboardService: DashBoardService) {
     this.teamOneName = this.appService.teamOne ? this.appService.teamOne.teamName : 'Team 1';
-    this.teamTwoName = this.appService.teamtwo ? this.appService.teamOne.teamName : 'Team 2';
+    this.teamTwoName = this.appService.teamtwo ? this.appService.teamtwo.teamName : 'Team 2';
     this.gameId = this.dashboardService.selectedMatchDetails ? this.dashboardService.selectedMatchDetails.game_id : '';
     this.teamOne = this.appService.teamOne;
     this.teamTwo = this.appService.teamtwo;

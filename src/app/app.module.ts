@@ -34,6 +34,8 @@ import { PlayerListComponent } from './shared/components/player-list/player-list
 import { MainTimerComponent } from './dashboard/main-timer/main-timer.component';
 import { TeamEventsComponent } from './dashboard/team-events/team-events.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { PlayerNumberComponent } from './shared/components/player-number/player-number.component';
+import { PlayerActionComponent } from './player-action/player-action.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     TeamOneComponent,
     TeamTwoComponent,
     MainTimerComponent,
-    TeamEventsComponent
+    TeamEventsComponent,
+    PlayerNumberComponent,
+    PlayerActionComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +76,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     AngularFirestore, DatePipe,
     DashBoardService
   ],
+  entryComponents: [PlayerActionComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

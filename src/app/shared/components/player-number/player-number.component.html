@@ -1,0 +1,6 @@
+<ng-container *ngFor="let player of playerList">
+    <div [ngClass]="{'imageSelectedStyle': player.jerseyNumber===selectedPlayer, 'imageDefaultStyle': player.jerseyNumber!==selectedPlayer}"
+        (click)="selectPlayer(player)" matTooltip="{{player.full_name}}">
+        {{player.jerseyNumber}}
+    </div>
+</ng-container>

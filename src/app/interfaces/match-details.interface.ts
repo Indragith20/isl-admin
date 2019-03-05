@@ -38,4 +38,5 @@ export interface IParticipants {
 export interface IPlayersInvolved {
     playerName?: string;
     role?: string;
+    jerseyNumber?: number;
 }

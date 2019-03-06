@@ -1,12 +1,12 @@
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { CustomerComponent } from './customer/customer.component';
-import { LineupsComponent } from './lineups/lineups.component';
-import { AuthGuardService } from './shared/auth-guard.service';
-import { EventsComponent } from './events/events.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { SelectMatchComponent } from './dashboard/select-match/select-match.component';
-import { MainDashboardComponent } from './dashboard/main-dashboard/main-dashboard.component';
+import { LoginComponent } from './components/login/login.component';
+import { CustomerComponent } from './components/customer/customer.component';
+import { LineupsComponent } from './components/lineups/lineups.component';
+import { AuthGuardService } from './services/auth-guard.service';
+import { EventsComponent } from './components/events/events.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SelectMatchComponent } from './components/dashboard/select-match/select-match.component';
+import { MainDashboardComponent } from './components/dashboard/main-dashboard/main-dashboard.component';
 
 
 export const routes: Routes = [

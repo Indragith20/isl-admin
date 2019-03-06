@@ -1,7 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { FormGroup, FormArray } from '@angular/forms';
-import { IPlayerList } from '../interfaces/player-list.interface';
+import { IPlayerList } from '../../interfaces/player-list.interface';
+
 
 export interface DialogData {
     title: string;

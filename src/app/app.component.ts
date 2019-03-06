@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppService } from './shared/app.service';
+import { AppService } from './services/app.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 

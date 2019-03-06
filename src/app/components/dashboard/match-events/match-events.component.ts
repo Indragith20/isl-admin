@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DashBoardService } from 'src/app/shared/dashboard.service';
-import { CustomerService } from 'src/app/shared/customer.service';
+import { DashBoardService } from '../../../services/dashboard.service';
+import { CustomerService } from '../../../services/customer.service';
 import { ISelectItem } from 'src/app/interfaces/select-item.interface';
 import { cards } from 'src/app/shared/constants/questions';
 import { ITeamList } from 'src/app/interfaces/team-list.interface';

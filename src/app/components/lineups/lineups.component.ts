@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from '../shared/customer.service';
+import { CustomerService } from '../../services/customer.service';
 import { DatePipe } from '@angular/common';
 import { mergeMap } from 'rxjs/operators';
 import { Router } from '@angular/router';

@@ -11,6 +11,8 @@ export class MainTimerComponent implements OnInit {
   minutes: any = 0;
   seconds: any = 0;
   timerInterval: any;
+  scoreLineText: string;
+  
   constructor() { }
 
   ngOnInit() {

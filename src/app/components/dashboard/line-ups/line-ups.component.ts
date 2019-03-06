@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from 'src/app/shared/customer.service';
+import { CustomerService } from '../../../services/customer.service';
 import { ITeamList } from 'src/app/interfaces/team-list.interface';
 import { IPlayerList } from 'src/app/interfaces/player-list.interface';
-import { DashBoardService } from 'src/app/shared/dashboard.service';
+import { DashBoardService } from '../../../services/dashboard.service';
 import { MatSnackBar } from '@angular/material';
 
 @Component({

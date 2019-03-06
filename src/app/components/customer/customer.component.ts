@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from '../shared/customer.service';
+import { CustomerService } from '../../services/customer.service';
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',

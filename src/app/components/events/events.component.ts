@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CustomerService } from '../shared/customer.service';
+import { CustomerService } from '../../services/customer.service';
 
 @Component({
   selector: 'app-events',

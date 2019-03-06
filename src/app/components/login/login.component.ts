@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppService } from '../shared/app.service';
+import { AppService } from '../../services/app.service';
 
 @Component({
   selector: 'app-otp-login',

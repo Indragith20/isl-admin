@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from 'src/app/shared/customer.service';
-import { DashBoardService } from 'src/app/shared/dashboard.service';
+import { CustomerService } from '../../../services/customer.service';
+import { DashBoardService } from '../../../services/dashboard.service';
 import { MatSnackBar } from '@angular/material';
 
 @Component({

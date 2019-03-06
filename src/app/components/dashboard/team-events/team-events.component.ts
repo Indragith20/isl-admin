@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { IPlayerList } from 'src/app/interfaces/player-list.interface';
 import { MatDialog } from '@angular/material';
-import { PlayerActionComponent } from 'src/app/player-action/player-action.component';
+import { PlayerActionComponent } from '../../player-action/player-action.component';
+
 
 @Component({
   selector: 'app-team-events',

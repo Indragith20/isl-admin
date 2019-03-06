@@ -19,3 +19,13 @@ export interface IPlayerList {
     playerSelected?: boolean;
     playerRole?: string;
 }
+
+export interface ILiveMatchList {
+    matchId: string;
+    homeTeamId: string;
+    homeTeamName: string;
+    awayTeamId: string;
+    awayTeamName: string;
+    homeTeamScore: string;
+    awayTeamScore: string;
+}

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { DashBoardService } from 'src/app/shared/dashboard.service';
+import { DashBoardService } from '../../../services/dashboard.service';
 import { MatDatepickerInputEvent } from '@angular/material';
 import { Router } from '@angular/router';
-import { CustomerService } from 'src/app/shared/customer.service';
+import { CustomerService } from '../../../services/customer.service';
 import { combineLatest } from 'rxjs';
 import { IPlayerList } from 'src/app/interfaces/player-list.interface';
 import { ITeamList } from 'src/app/interfaces/team-list.interface';

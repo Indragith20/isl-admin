@@ -1,11 +1,16 @@
 <mat-card>
   <div class="row">
-    <div class="col-md-4" style="margin: auto">
+    <div class="col-md-2" style="margin: auto">
         <button mat-raised-button	color="primary" (click)="startTimer()">Start Timer</button>
+    </div>
+    <div class="col-md-2" style="margin: auto">
         <button mat-raised-button	color="primary" (click)="resetTimer()">Reset Timer</button>
     </div>
-    <div class="col-md-4 timer-style">
-      {{ timerFullDate }}
+    <div class="col-md-2 timer-style">
+      Timer - {{ timerFullDate }}
+    </div>
+    <div class="col-md-2 timer-style">
+      ScoreLine - {{ scoreLineText }}
     </div>
     <div class="col-md-4">
         <button mat-raised-button	color="warn" (click)="stopTimer()">Stop Timer</button>

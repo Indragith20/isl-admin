@@ -68,7 +68,7 @@ export class MatchStatsComponent implements OnInit {
     console.log(this.statsData);
     this.appService.submitStatsData(this.gameId, this.statsData)
       .then((data) => {
-        this.appService.sendNotification('Stats Available', `${this.teamOneName}-${this.teamTwoName}`);
+        this.dashboardService.sendNotification('Stats Available', `${this.teamOneName}-${this.teamTwoName}`);
         this.openSnackBar('Notification Sent');
       }).catch((err) => {
         this.openSnackBar('Something Bad Happened');

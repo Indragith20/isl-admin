@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { IPlayerList } from 'src/app/interfaces/player-list.interface';
 import { MatDialog } from '@angular/material';
@@ -21,6 +21,7 @@ export class TeamEventsComponent implements OnInit {
   @Input() players: IPlayerList[];
   @Input() teamId: string;
   @Input() teamName: string;
+  @Output() selectedEventDetails = new EventEmitter();
   modalContent: FormGroup;
 
   get formData() { return <FormArray>this.cardForms.get('cards'); }
@@ -69,15 +70,19 @@ export class TeamEventsComponent implements OnInit {
       data: {
         title: card.get('title').value,
         modalContent: card,
-        selectedTeamId: this.teamId,
+        selectedTeam: {
+          teamId: this.teamId,
+          teamName: this.teamName
+        },
         selectedTeamPlayers: this.players,
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if(result) {
         // this.createStatsData(dialogRef.componentInstance);
         console.log(result);
+        this.selectedEventDetails.emit(result);
       }
     });
   }

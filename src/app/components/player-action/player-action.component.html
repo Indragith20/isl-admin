@@ -10,7 +10,7 @@
                     <b>{{question.get('question').value}}</b>
                   </div>
                   <ng-container>
-                    <app-player-number [questionId]="question.get('questionId').value"
+                    <app-player-number [question]="question.get('question').value"
                       [playerInField]="selectedTeamPlayerInField" (playerSelected)="changeSelectedPlayer($event)"></app-player-number>
                   </ng-container>
               </div>
@@ -41,5 +41,5 @@
 </div>
 <div class="row actionStyle" mat-dialog-actions>
   <button mat-button (click)="onCancelClick()">Cancel</button>
-  <button mat-button (click)="onUpdateClick()">Update</button>
+  <button mat-button [disabled]="!selectedOptions" (click)="onUpdateClick()">Update</button>
 </div>

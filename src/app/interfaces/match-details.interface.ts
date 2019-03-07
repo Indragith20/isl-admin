@@ -40,3 +40,13 @@ export interface IPlayersInvolved {
     role?: string;
     jerseyNumber?: number;
 }
+
+export interface ILiveMatchList {
+    matchId: string;
+    homeTeamId: string;
+    homeTeamName: string;
+    awayTeamId: string;
+    awayTeamName: string;
+    homeTeamScore: number;
+    awayTeamScore: number;
+}

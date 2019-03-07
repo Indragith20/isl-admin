@@ -6,5 +6,6 @@
 
 .headingStyle {
     padding: 5px;
-    color: white;
+    color: black;
+    border-bottom: 1px solid lightgray;
 }

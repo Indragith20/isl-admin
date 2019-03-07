@@ -20,12 +20,21 @@ export interface IPlayerList {
     playerRole?: string;
 }
 
-export interface ILiveMatchList {
-    matchId: string;
-    homeTeamId: string;
-    homeTeamName: string;
-    awayTeamId: string;
-    awayTeamName: string;
-    homeTeamScore: string;
-    awayTeamScore: string;
+export interface IEventTeamDetails {
+    teamId: string;
+    teamName: string;
+}
+
+export interface IEventPlayerDetails {
+    playerId: string;
+    playerName: string;
+    jerseyNumber: string;
+}
+
+export interface IEventList {
+    eventName: string;
+    teamDetails?: IEventTeamDetails;
+    playerDetails?: IEventPlayerDetails;
+    scoreline: string;
+    time: string;
 }

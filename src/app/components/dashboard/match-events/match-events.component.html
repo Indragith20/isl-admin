@@ -4,11 +4,15 @@
     <div class="col-md-4">
       <h3 class="text-center">Match Events</h3>
     </div>
-    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <mat-card>
+        ScoreLine {{scoreLineText}}
+      </mat-card>
+    </div>
   </div>
   <div class="row" style="margin-top: 10px;">
     <div class="col-md-12">
-      <app-main-timer></app-main-timer>
+      <app-main-timer #timerref (startMatch)="startMatch($event)" (endMatch)="endMatch($event)"></app-main-timer>
     </div>
   </div>
   <div class="row" style="margin-top: 20px;">
@@ -21,7 +25,7 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
           <app-team-events [teamId]="teamOneId" [cardDetails]="events" 
-            [teamName]="teamOneName" [players]="teamOnePlayersList"></app-team-events>
+            [teamName]="teamOneName" [players]="teamOnePlayersList" (selectedEventDetails)="updateEventDetails($event)"></app-team-events>
         </mat-expansion-panel>
       </mat-accordion>
     </div>
@@ -34,7 +38,7 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
           <app-team-events [teamId]="teamTwoId" [cardDetails]="events" 
-            [teamName]="teamTwoName" [players]="teamTwoPlayersList"></app-team-events>
+            [teamName]="teamTwoName" [players]="teamTwoPlayersList" (selectedEventDetails)="updateEventDetails($event)"></app-team-events>
         </mat-expansion-panel>
       </mat-accordion>
       </div>

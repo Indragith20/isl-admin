@@ -1,13 +1,14 @@
 import { Component, Inject } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { FormGroup, FormArray } from '@angular/forms';
-import { IPlayerList } from '../../interfaces/player-list.interface';
+import { IPlayerList, IEventTeamDetails } from '../../interfaces/player-list.interface';
+import { ISelectedQP } from 'src/app/interfaces/select-item.interface';
 
 
 export interface DialogData {
     title: string;
     modalContent: FormGroup;
-    selectedTeamId: string;
+    selectedTeam: IEventTeamDetails;
     selectedTeamPlayers: IPlayerList[];
 }
 
@@ -22,6 +23,8 @@ export class PlayerActionComponent {
   modalTitle: string;
   selectedTeamPlayerInField: IPlayerList[];
   selectedTeamPlayer: any[] = [];
+  selectedOptions: ISelectedQP = null;
+  teamDetails: IEventTeamDetails;
   
   player: any;
   
@@ -30,23 +33,36 @@ export class PlayerActionComponent {
   }
 
   constructor(public dialogRef: MatDialogRef<PlayerActionComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+    console.log(data);
     this.modalContent = data.modalContent;
     this.modalTitle = data.title;
-    // this.selectedTeamPlayerInField = data.selectedTeamPlayers.filter(player => player.is_substitute === false);
+    this.teamDetails = data.selectedTeam
     this.selectedTeamPlayerInField = data.selectedTeamPlayers;
-    
-  }
-
-  onUpdateClick(): void {
-    this.dialogRef.close(true);
   }
 
   onCancelClick(): void {
     this.dialogRef.close(false);
   }
 
-  changeSelectedPlayer(playerDet: any) {
-    console.log(playerDet);
+
+  changeSelectedPlayer(selectedDetails: ISelectedQP) {
+    this.selectedOptions = selectedDetails;
+  }
+
+  onUpdateClick() {
+    let newEvent = {};
+    if(this.selectedOptions && this.selectedOptions.question && this.selectedOptions.selectedPlayer) {
+      newEvent = {
+        eventName: this.modalTitle,
+        playerDetails: {
+          playerId: this.selectedOptions.selectedPlayer.player_id,
+          playerName: this.selectedOptions.selectedPlayer.full_name,
+          jerseyNumber: this.selectedOptions.selectedPlayer.jersey_number
+        },
+        teamDetails: this.teamDetails
+      };
+    }
+    this.dialogRef.close(newEvent);
   }
 
   /* submit() {

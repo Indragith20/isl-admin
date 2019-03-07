@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-main-timer',
@@ -12,7 +12,9 @@ export class MainTimerComponent implements OnInit {
   seconds: any = 0;
   timerInterval: any;
   scoreLineText: string;
-  
+  @Output() startMatch = new EventEmitter<boolean>();
+  @Output() endMatch = new EventEmitter<boolean>();
+
   constructor() { }
 
   ngOnInit() {
@@ -32,6 +34,7 @@ export class MainTimerComponent implements OnInit {
                                 ${this.seconds < 10 ? '0' + this.seconds : this.seconds}`;
       }, 1000);
     }
+    this.startMatch.emit(true);
   }
 
   stopTimer() {
@@ -50,6 +53,10 @@ export class MainTimerComponent implements OnInit {
     this.seconds = 0;
     this.timerFullDate = `${this.minutes < 10 ? '0' + this.minutes :  this.minutes} :
                                 ${this.seconds < 10 ? '0' + this.seconds : this.seconds}`;
+  }
+
+  endTimer() {
+    this.endMatch.emit(true);
   }
 
 }

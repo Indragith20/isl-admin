@@ -53,7 +53,7 @@ export class LineUpsComponent implements OnInit {
 
   sendNotification() {
     const notificationString = `${this.teamOne.teamName} - ${this.teamTwo.teamName}`;
-    this.appService.sendNotification('Lineups Available', notificationString);
+    this.dashboardService.sendNotification('Lineups Available', notificationString);
     // TODO: Convert above to promise
     this.openSnackBar('Notification Sent');
   }

@@ -36,6 +36,7 @@ import { TeamEventsComponent } from './components/dashboard/team-events/team-eve
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { PlayerNumberComponent } from './shared/components/player-number/player-number.component';
 import { PlayerActionComponent } from './components/player-action/player-action.component';
+import { NewsDashboardComponent } from './components/news-dashboard/news-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { PlayerActionComponent } from './components/player-action/player-action.
     CustomerListComponent,
     LineupsComponent,
     EventsComponent,
+    NewsDashboardComponent,
     DashboardComponent,
     SelectMatchComponent,
     MainDashboardComponent,

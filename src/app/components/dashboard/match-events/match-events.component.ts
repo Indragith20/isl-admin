@@ -54,14 +54,14 @@ export class MatchEventsComponent implements OnInit, OnDestroy {
     if(eventData.eventName === 'Goal') {
       if(this.teamOneId === eventData.teamDetails.teamId) {
           this.dashboardService.updateHomeTeamScore().then((data) => {
-            this.updateStatsData(eventData.eventName, eventData.playerDetails, eventData.teamDetails);
+            this.updateStatsData(eventData.eventName, true, eventData.playerDetails, eventData.teamDetails);
           });
       } else if(this.teamTwoId === eventData.teamDetails.teamId) {
           this.dashboardService.updateAwayTeamScore().then((data) => {
-            this.updateStatsData(eventData.eventName, eventData.playerDetails, eventData.teamDetails);
+            this.updateStatsData(eventData.eventName, true, eventData.playerDetails, eventData.teamDetails);
           });
       } else {
-        this.updateStatsData(eventData.eventName, eventData.playerDetails, eventData.teamDetails);
+        this.updateStatsData(eventData.eventName, true, eventData.playerDetails, eventData.teamDetails);
       }
 
     }
@@ -80,33 +80,37 @@ export class MatchEventsComponent implements OnInit, OnDestroy {
       }
       this.dashboardService.startLiveMatch(matchDetails).then((data) => {
         if(data) {
-          this.updateStatsData('Kick off');
+          this.updateStatsData('Kick off', false);
         }
       });
     }
   }
 
-  updateStatsData(eventName: string, playerDetails?: IEventPlayerDetails, teamDetails?: IEventTeamDetails) {
+  updateStatsData(eventName: string, displayScore: boolean, playerDetails?: IEventPlayerDetails, teamDetails?: IEventTeamDetails) {
     let newEvent: IEventList = {
       eventName: eventName,
       scoreline: this.scoreLineText,
       time: this.timerRef.minutes
     };
-    let notificationString = `${this.teamOneName}-${this.teamTwoName}`;
+    let modifiedEventName: string = eventName;
+    let notificationString = displayScore ? `${this.teamOneName} ${this.scoreLineText} ${this.teamTwoName}` : `${this.teamOneName} - ${this.teamTwoName}`;
     if(playerDetails && teamDetails) {
       newEvent = { ...newEvent, playerDetails, teamDetails };
       notificationString = `${this.teamOneName} ${this.scoreLineText} ${this.teamTwoName}`;
+      // TODO: Add Player Name and team name if necessary
+      modifiedEventName = `${modifiedEventName} (${this.timerRef.minutes}')`
     }
+
     this.dashboardService.postEventsData(newEvent, this.gameId).then((data) => {
-      this.dashboardService.sendNotification(eventName, notificationString);
+      this.dashboardService.sendNotification(modifiedEventName, notificationString);
       this.openSnackBar('Notification Sent');
     }).catch((err) => {
       this.openSnackBar('Something Bad Happened');
     });
   }
 
-  endMatch($event) {
-
+  endMatch(event) {
+    this.updateStatsData('Match Ended', true);
   }
 
   openSnackBar(message: string, action?: string) {

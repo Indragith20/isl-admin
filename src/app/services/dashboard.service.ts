@@ -66,8 +66,8 @@ export class DashBoardService {
                     homeTeamScore: match.homeTeamScore,
                     awayTeamScore: match.awayTeamScore
                 })
-                .then((data) => resolve(data))
-                .catch((err) => reject(err));
+                .then((data) => resolve('data'))
+                .catch((err) => reject('err'));
             }
         })
     }
@@ -92,8 +92,8 @@ export class DashBoardService {
                 ref.update({
                     awayTeamScore: this.awayTeamScore + 1,
                 })
-                .then((data) => resolve(data))
-                .catch((err) => reject(err));
+                .then((data) => resolve('data'))
+                .catch((err) => reject('err'));
             }
         })
         

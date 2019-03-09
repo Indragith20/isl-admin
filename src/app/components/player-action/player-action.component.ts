@@ -36,7 +36,7 @@ export class PlayerActionComponent {
     console.log(data);
     this.modalContent = data.modalContent;
     this.modalTitle = data.title;
-    this.teamDetails = data.selectedTeam
+    this.teamDetails = data.selectedTeam;
     this.selectedTeamPlayerInField = data.selectedTeamPlayers;
   }
 

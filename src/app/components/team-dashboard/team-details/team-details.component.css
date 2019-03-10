@@ -1,0 +1,42 @@
+.back-btn-style {
+    background-color: red;
+    color: white;
+}
+.edit-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.team-details-header-style {
+    margin: 10px;
+}
+
+.team-details-content-header-style {
+    margin: 10px;
+    max-height: 350px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.team-details-content-style {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    padding: 5px;
+    border-bottom: 1px solid lightblue;
+}
+
+.team-details-key-style {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    text-transform: capitalize;
+}
+
+.bottom-btn-style {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}

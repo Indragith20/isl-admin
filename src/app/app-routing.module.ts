@@ -7,6 +7,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SelectMatchComponent } from './components/dashboard/select-match/select-match.component';
 import { MainDashboardComponent } from './components/dashboard/main-dashboard/main-dashboard.component';
 import { NewsDashboardComponent } from './components/news-dashboard/news-dashboard.component';
+import { TeamDashboardComponent } from './components/team-dashboard/team-dashboard.component';
+import { TeamListComponent } from './components/team-dashboard/team-list/team-list.component';
+import { TeamDetailsComponent } from './components/team-dashboard/team-details/team-details.component';
 
 
 export const routes: Routes = [
@@ -28,6 +31,14 @@ export const routes: Routes = [
     ]
   },
   { path: 'events/:id', component: EventsComponent, canActivate: [AuthGuardService] },
+  { path: 'teams-dashboard',
+    component: TeamDashboardComponent,
+    children: [
+      { path: '', redirectTo: 'teams-list', pathMatch: 'full' },
+      { path: 'teams-list', component: TeamListComponent },
+      { path: 'teams-details', component: TeamDetailsComponent }
+    ],
+    canActivate: [AuthGuardService] }
   // {path: '**', redirectTo: 'login'}
 ];
 

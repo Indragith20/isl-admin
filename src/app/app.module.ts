@@ -7,8 +7,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { CustomerComponent } from './components/customer/customer.component';
-import { CustomerListComponent } from './components/customer-list/customer-list.component';
+import { CustomerComponent } from './components/news-dashboard/customer/customer.component';
+import { CustomerListComponent } from './components/news-dashboard/customer-list/customer-list.component';
 import { CustomerService } from './services/customer.service';
 import { environment } from '../environments/environment';
 import { routing } from './app-routing.module';
@@ -37,6 +37,10 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
 import { PlayerNumberComponent } from './shared/components/player-number/player-number.component';
 import { PlayerActionComponent } from './components/player-action/player-action.component';
 import { NewsDashboardComponent } from './components/news-dashboard/news-dashboard.component';
+import { TeamDashboardComponent } from './components/team-dashboard/team-dashboard.component';
+import { TeamListComponent } from './components/team-dashboard/team-list/team-list.component';
+import { TeamDetailsComponent } from './components/team-dashboard/team-details/team-details.component';
+import { Keyobject } from './shared/pipes/keys-transform.pipe';
 
 @NgModule({
   declarations: [
@@ -60,7 +64,11 @@ import { NewsDashboardComponent } from './components/news-dashboard/news-dashboa
     MainTimerComponent,
     TeamEventsComponent,
     PlayerNumberComponent,
-    PlayerActionComponent
+    PlayerActionComponent,
+    TeamDashboardComponent,
+    TeamListComponent,
+    TeamDetailsComponent,
+    Keyobject
   ],
   imports: [
     BrowserModule,

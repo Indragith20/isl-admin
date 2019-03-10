@@ -1,0 +1,15 @@
+<ng-container>
+    <div class="loader-style">
+      <mat-spinner *ngIf="loading"></mat-spinner>
+    </div>
+    <div>
+    <mat-nav-list *ngIf="!loading" class="container">
+      <mat-list-item *ngFor="let team of teams" class="team-list-style" (click)="goToTeamDetails(team)">
+        <span>{{team.teamName}}</span>
+        <span>
+          <mat-icon>chevron_right</mat-icon>
+        </span>
+      </mat-list-item>
+    </mat-nav-list>
+    </div>
+  </ng-container>

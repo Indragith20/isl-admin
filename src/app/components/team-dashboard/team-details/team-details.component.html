@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row team-details-header-style">
+    <div class="col-md-4">
+      <button mat-raised-button color="warn" (click)="backToTeamDetails()">Back</button>
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4 edit-btn-container">
+      <button mat-raised-button color="accent" (click)="toggleEditMode()">Edit</button>
+    </div>
+  </div>
+  <hr />
+  <div class="row team-details-content-header-style" *ngIf="teamDetails">
+    <div class="col-md-12 team-details-content-style" *ngFor="let team of teamDetails | keyobject">
+      <div class="col-md-4 team-details-key-style">
+        {{team.key}}
+      </div>
+      <div class="col-md-8" *ngIf="!editMode">
+        {{team.value}}
+      </div>
+      <div class="col-md-8" *ngIf="editMode">
+          <input type="text" mat-input value="{{team.value}}" class="form-control">
+        </div>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 10px" *ngIf="editMode">
+    <hr />
+    <div class="col-md-12 bottom-btn-style">
+      <button mat-raised-button>Cancel</button>
+      <button mat-raised-button color="primary">Update</button>
+    </div>
+  </div>
+</div>

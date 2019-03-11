@@ -3,6 +3,7 @@ import { TeamDetailsService } from 'src/app/services/team-details.service';
 import { ITeams } from 'src/app/interfaces/team-details.interface';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-team-details',
@@ -18,7 +19,7 @@ export class TeamDetailsComponent implements OnInit {
   get teamDetailsFormArray() { return (<FormArray>this.teamDetailsForm.get('teamDetailsArray')); }
 
   constructor(private teamDetailsService: TeamDetailsService, private router: Router,
-    private route: ActivatedRoute, private fb: FormBuilder) { }
+    private route: ActivatedRoute, private fb: FormBuilder, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.teamDetails = this.teamDetailsService.selectedTeam ? this.teamDetailsService.selectedTeam : null;
@@ -35,11 +36,11 @@ export class TeamDetailsComponent implements OnInit {
       const newFormGroup = this.fb.group({
         [teamKey]: this.teamDetails[teamKey]
       });
+      // Below Condition check is necessary to make the teamID field disabled;
+      teamKey === 'teamId' ? newFormGroup.disable() : newFormGroup.enable();
       (this.teamDetailsForm.get('teamDetailsArray') as FormArray).push(newFormGroup);
       this.formProperties.push(teamKey);
     });
-    console.log(this.teamDetailsForm);
-    console.log(this.formProperties);
   }
 
   backToTeamDetails() {
@@ -52,6 +53,31 @@ export class TeamDetailsComponent implements OnInit {
 
   updateTeamDetails() {
     console.log(this.teamDetailsFormArray.value);
+    let modifiedTeamObj: ITeams = {
+      teamId: '',
+      teamName: ''
+    };
+    const updatedTeamDetails = this.teamDetailsFormArray.value;
+    updatedTeamDetails.map((teamDet) => {
+      modifiedTeamObj = { ...modifiedTeamObj, ...teamDet };
+    })
+    console.log(modifiedTeamObj);
+    this.teamDetailsService.updateTeamDetails(modifiedTeamObj.teamId, modifiedTeamObj).then((data) => {
+      console.log(data);
+      this.openSnackBar('Update Successfull', 'snackbar-success-style');
+    }).catch((err) => {
+      console.log(err);
+      this.openSnackBar('Not Updated', 'snackbar-error-style')
+    })
+  }
+
+  openSnackBar(message: string, className: string, action?: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: [className],
+      horizontalPosition: 'right',
+      verticalPosition: 'top'
+    });
   }
 
 }

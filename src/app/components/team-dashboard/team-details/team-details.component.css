@@ -40,3 +40,13 @@
     align-items: center;
     margin: 10px;
 }
+
+::ng-deep .snackbar-error-style {
+    background-color: lightcoral;
+    color: black;
+}
+
+::ng-deep .snackbar-success-style {
+    background-color: lightgreen;
+    color: white;
+}

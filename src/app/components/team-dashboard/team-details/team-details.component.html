@@ -10,23 +10,27 @@
   </div>
   <hr />
   <div class="row team-details-content-header-style" *ngIf="teamDetails">
-    <div class="col-md-12 team-details-content-style" *ngFor="let team of teamDetails | keyobject">
-      <div class="col-md-4 team-details-key-style">
-        {{team.key}}
+    <ng-container [formGroup]="teamDetailsForm">
+      <div class="col-md-12 team-details-content-style" *ngFor="let team of teamDetailsFormArray.controls; let i = index">
+        <ng-container [formGroup]="team">
+          <div class="col-md-4 team-details-key-style">
+            {{formProperties[i]}}
+          </div>
+          <div class="col-md-8" *ngIf="!editMode">
+            {{team.get(formProperties[i]).value}}
+          </div>
+          <div class="col-md-8" *ngIf="editMode">
+            <input type="text" mat-input [formControlName]="formProperties[i]" class="form-control">
+          </div>
+        </ng-container>
       </div>
-      <div class="col-md-8" *ngIf="!editMode">
-        {{team.value}}
-      </div>
-      <div class="col-md-8" *ngIf="editMode">
-          <input type="text" mat-input value="{{team.value}}" class="form-control">
-        </div>
-    </div>
+    </ng-container>
   </div>
   <div class="row" style="margin-top: 10px" *ngIf="editMode">
     <hr />
     <div class="col-md-12 bottom-btn-style">
-      <button mat-raised-button>Cancel</button>
-      <button mat-raised-button color="primary">Update</button>
+      <button mat-raised-button (click)="toggleEditMode()">Cancel</button>
+      <button mat-raised-button color="primary" (click)="updateTeamDetails()">Update</button>
     </div>
   </div>
 </div>

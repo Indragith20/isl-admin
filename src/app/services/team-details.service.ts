@@ -26,6 +26,29 @@ export class TeamDetailsService {
         this.selectedTeam = {...team};
     }
 
+    getLastAddedTeamId() {
+        return new Promise((resolve, reject) => {
+            const ref = this.db.database.ref('teams/teamDetails').orderByChild('teamId').limitToLast(1);
+            if(ref) {
+                ref.on('value', (snapshot) => {
+                    console.log(snapshot.val());
+                    let lastAddedTeam = {
+                        teamId: undefined,
+                        teamName: undefined
+                    };
+                    lastAddedTeam = {...lastAddedTeam , ...Object.values(snapshot.val())[0]};
+                    if(lastAddedTeam && lastAddedTeam.teamId) {
+                        resolve(lastAddedTeam.teamId);
+                    } else {
+                        reject('Error');
+                    }
+                })
+            } else {
+                reject('Error');
+            }
+        })
+    }
+
     updateTeamDetails(teamId: string, teamDetails: ITeams) {
         return new Promise((resolve, reject) => {
             const ref = this.db.database.ref('teams/teamDetails/').orderByChild('teamId').equalTo(teamId);

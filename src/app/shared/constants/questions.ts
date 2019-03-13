@@ -54,3 +54,10 @@ export const cards = [{
         type: 'icon'
     }]
 }];
+
+
+export const TeamAction = {
+    ADD_CONSTANTS: 'add',
+    EDIT_CONSTANTS: 'edit'
+}
+

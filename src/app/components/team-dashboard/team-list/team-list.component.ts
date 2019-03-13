@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TeamDetailsService } from 'src/app/services/team-details.service';
 import { ITeams } from 'src/app/interfaces/team-details.interface';
 import { Router, ActivatedRoute } from '@angular/router';
+import { TeamAction } from 'src/app/shared/constants/questions';
 
 @Component({
   selector: 'app-team-list',
@@ -25,7 +26,11 @@ export class TeamListComponent implements OnInit {
 
   goToTeamDetails(team: ITeams) {
     this.teamDetailsService.setSelectedTeam(team);
-    this.router.navigate(['../teams-details'], { relativeTo: this.route });
+    this.router.navigate(['../teams-details'], { queryParams: { action: TeamAction.EDIT_CONSTANTS }, relativeTo: this.route });
+  }
+
+  addNewTeam() {
+    this.router.navigate(['../teams-details'], { queryParams: { action: TeamAction.ADD_CONSTANTS }, relativeTo: this.route});
   }
 
 }

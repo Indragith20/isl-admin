@@ -2,8 +2,8 @@
     <div class="align-center-style">
       <mat-spinner *ngIf="loading"></mat-spinner>
     </div>
-    <div  class="container">
-      <mat-nav-list *ngIf="!loading">
+    <div class="container" *ngIf="!loading">
+      <mat-nav-list >
         <mat-list-item *ngFor="let team of teams" class="team-list-style" (click)="goToTeamDetails(team)">
           <span>{{team.teamName}}</span>
           <span>
@@ -11,10 +11,11 @@
           </span>
         </mat-list-item>
       </mat-nav-list>
-    </div>
-    <div class="row margin-row-style">
-      <div class="col-md-12 align-center-style">
-        <button mat-raised-button color="warn" (click)="addNewTeam()">+ Add New Team</button>
+      <div class="row margin-row-style">
+        <div class="col-md-12 align-center-style">
+          <button mat-raised-button color="warn" (click)="addNewTeam()">+ Add New Team</button>
+        </div>
       </div>
     </div>
+    
   </ng-container>

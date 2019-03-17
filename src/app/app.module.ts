@@ -41,6 +41,7 @@ import { TeamDashboardComponent } from './components/team-dashboard/team-dashboa
 import { TeamListComponent } from './components/team-dashboard/team-list/team-list.component';
 import { TeamDetailsComponent } from './components/team-dashboard/team-details/team-details.component';
 import { Keyobject } from './shared/pipes/keys-transform.pipe';
+import { ExcelService } from './services/excel.service';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { Keyobject } from './shared/pipes/keys-transform.pipe';
   providers: [
     CustomerService, AppService, AuthGuardService, AngularFireAuth,
     AngularFirestore, DatePipe,
-    DashBoardService
+    DashBoardService,
+    ExcelService
   ],
   entryComponents: [PlayerActionComponent],
   bootstrap: [AppComponent]

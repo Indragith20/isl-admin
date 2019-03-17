@@ -6,6 +6,8 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { TeamAction } from 'src/app/shared/constants/questions';
+import { ExcelService } from 'src/app/services/excel.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-team-details',
@@ -19,13 +21,16 @@ export class TeamDetailsComponent implements OnInit, OnDestroy {
   paramSubscription: Subscription;
   formProperties: string[] = [];
   loading: boolean = true;
-  
+  arrayBuffer: any;
+  file: File;
+
   get teamDetailsFormArray() { return (<FormArray>this.teamDetailsForm.get('teamDetailsArray')); }
 
   constructor(private teamDetailsService: TeamDetailsService, private router: Router,
-    private route: ActivatedRoute, private fb: FormBuilder, public snackBar: MatSnackBar) {
+    private route: ActivatedRoute, private fb: FormBuilder, public snackBar: MatSnackBar,
+    private excelService: ExcelService) {
       this.paramSubscription = this.route.queryParams.subscribe((params) => {
-        this.performAction(params['action']);    
+        this.performAction(params['action']);
       })
   }
 
@@ -88,7 +93,6 @@ export class TeamDetailsComponent implements OnInit, OnDestroy {
   }
 
   updateTeamDetails() {
-    console.log(this.teamDetailsFormArray.value);
     let modifiedTeamObj: ITeams = {
       teamId: '',
       teamName: ''
@@ -96,15 +100,13 @@ export class TeamDetailsComponent implements OnInit, OnDestroy {
     const updatedTeamDetails = this.teamDetailsFormArray.value;
     updatedTeamDetails.map((teamDet) => {
       modifiedTeamObj = { ...modifiedTeamObj, ...teamDet };
-    })
+    });
     console.log(modifiedTeamObj);
     this.teamDetailsService.updateTeamDetails(modifiedTeamObj.teamId, modifiedTeamObj).then((data) => {
-      console.log(data);
       this.openSnackBar('Update Successfull', 'snackbar-success-style');
     }).catch((err) => {
-      console.log(err);
-      this.openSnackBar('Not Updated', 'snackbar-error-style')
-    })
+      this.openSnackBar('Not Updated', 'snackbar-error-style');
+    });
   }
 
   openSnackBar(message: string, className: string, action?: string) {
@@ -113,6 +115,61 @@ export class TeamDetailsComponent implements OnInit, OnDestroy {
       panelClass: [className],
       horizontalPosition: 'right',
       verticalPosition: 'top'
+    });
+  }
+
+  downloadSampleExcel() {
+    this.loading = true;
+    const sampleData: Partial<ITeams>[] = [{
+      color: '',
+      fanBase: '',
+      fanClub: '',
+      headCoach: '',
+      highlights: '',
+      homeVenue: '',
+      icon: '',
+      profile: '',
+      rivals: '',
+      shortName: '',
+      teamName: '',
+      twitterAccount: '',
+    }];
+    this.excelService.exportAsExcelFile(sampleData, 'Teams').then((data) => {
+      this.loading = false;
+    });
+  }
+
+  incomingfile(event) {
+    this.file = event.target.files[0];
+  }
+
+  upload() {
+    const fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      this.arrayBuffer = fileReader.result;
+      const data = new Uint8Array(this.arrayBuffer);
+      const arr = new Array();
+      for (let i = 0; i !== data.length; ++i) {
+        arr[i] = String.fromCharCode(data[i]);
+      }
+      const bstr = arr.join('');
+      const workbook = XLSX.read(bstr, { type: 'binary' });
+      const first_sheet_name = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[first_sheet_name];
+      console.log(XLSX.utils.sheet_to_json(worksheet, { raw: true }));
+      this.formatTeamData(XLSX.utils.sheet_to_json(worksheet, { raw: true }));
+    };
+    fileReader.readAsArrayBuffer(this.file);
+  }
+
+  formatTeamData(teamData: Partial<ITeams[]>) {
+    this.teamDetailsService.getLastAddedTeamId().then((data) => {
+      let lastAddedTeamID = +data;
+      const formattedTeam = teamData.map((team) => {
+        lastAddedTeamID = lastAddedTeamID + 1;
+        return { ...team, teamId: lastAddedTeamID };
+      });
+      console.log(formattedTeam);
     });
   }
 

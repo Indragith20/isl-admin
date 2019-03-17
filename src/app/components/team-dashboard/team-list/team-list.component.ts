@@ -12,11 +12,12 @@ import { TeamAction } from 'src/app/shared/constants/questions';
 export class TeamListComponent implements OnInit {
   teams: ITeams[] = [];
   loading: boolean = true;
-  
-  constructor(private teamDetailsService: TeamDetailsService, private router: Router, private route: ActivatedRoute) { }
+
+  constructor(private teamDetailsService: TeamDetailsService, private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.teamDetailsService.getTeams().then((teams : ITeams[]) => {
+    this.teamDetailsService.getTeams().then((teams: ITeams[]) => {
       this.loading = false;
       this.teams = teams;
     }).catch((err) => {
@@ -30,7 +31,7 @@ export class TeamListComponent implements OnInit {
   }
 
   addNewTeam() {
-    this.router.navigate(['../teams-details'], { queryParams: { action: TeamAction.ADD_CONSTANTS }, relativeTo: this.route});
+    this.router.navigate(['../teams-details'], { queryParams: { action: TeamAction.ADD_CONSTANTS }, relativeTo: this.route });
   }
 
 }

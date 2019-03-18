@@ -19,28 +19,13 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { LineupsComponent } from './components/lineups/lineups.component';
 import { DatePipe } from '@angular/common';
 import { EventsComponent } from './components/events/events.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MyOwnCustomMaterialModule } from './app-material.module';
-import { SelectMatchComponent } from './components/dashboard/select-match/select-match.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashBoardService } from './services/dashboard.service';
-import { MainDashboardComponent } from './components/dashboard/main-dashboard/main-dashboard.component';
-import { LineUpsComponent } from './components/dashboard/line-ups/line-ups.component';
-import { MatchEventsComponent } from './components/dashboard/match-events/match-events.component';
-import { MatchStatsComponent } from './components/dashboard/match-stats/match-stats.component';
-import { TeamOneComponent } from './components/dashboard/team-one/team-one.component';
-import { TeamTwoComponent } from './components/dashboard/team-two/team-two.component';
-import { PlayerListComponent } from './shared/components/player-list/player-list.component';
-import { MainTimerComponent } from './components/dashboard/main-timer/main-timer.component';
-import { TeamEventsComponent } from './components/dashboard/team-events/team-events.component';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { PlayerNumberComponent } from './shared/components/player-number/player-number.component';
 import { PlayerActionComponent } from './components/player-action/player-action.component';
 import { NewsDashboardComponent } from './components/news-dashboard/news-dashboard.component';
-import { TeamDashboardComponent } from './components/team-dashboard/team-dashboard.component';
-import { TeamListComponent } from './components/team-dashboard/team-list/team-list.component';
-import { TeamDetailsComponent } from './components/team-dashboard/team-details/team-details.component';
-import { Keyobject } from './shared/pipes/keys-transform.pipe';
 import { ExcelService } from './services/excel.service';
 
 @NgModule({
@@ -53,23 +38,8 @@ import { ExcelService } from './services/excel.service';
     LineupsComponent,
     EventsComponent,
     NewsDashboardComponent,
-    DashboardComponent,
-    SelectMatchComponent,
-    MainDashboardComponent,
-    LineUpsComponent,
-    MatchEventsComponent,
-    MatchStatsComponent,
-    PlayerListComponent,
-    TeamOneComponent,
-    TeamTwoComponent,
-    MainTimerComponent,
-    TeamEventsComponent,
     PlayerNumberComponent,
     PlayerActionComponent,
-    TeamDashboardComponent,
-    TeamListComponent,
-    TeamDetailsComponent,
-    Keyobject
   ],
   imports: [
     BrowserModule,

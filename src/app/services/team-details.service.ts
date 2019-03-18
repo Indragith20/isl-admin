@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { ITeams } from '../interfaces/team-details.interface';
-import { resolve } from 'q';
 
 @Injectable()
 export class TeamDetailsService {
@@ -15,11 +14,11 @@ export class TeamDetailsService {
                 ref.once('value', (snapshot) => {
                     const teams = snapshot.val();
                     resolve(teams);
-                })
+                });
             } else {
-                reject('error in getting teams')
+                reject('error in getting teams');
             }
-        })
+        });
     }
 
     setSelectedTeam(team: ITeams) {
@@ -42,24 +41,39 @@ export class TeamDetailsService {
                     } else {
                         reject('Error');
                     }
-                })
+                });
             } else {
                 reject('Error');
             }
-        })
+        });
     }
 
-    updateTeamDetails(teamId: string, teamDetails: ITeams) {
-        return new Promise((resolve, reject) => {
-            const ref = this.db.database.ref('teams/teamDetails/').orderByChild('teamId').equalTo(teamId);
-            ref.once('value', (snapshot) => {
-                snapshot.forEach((childSnapshot) => {
-                    const teamRef = childSnapshot.ref;
-                    teamRef.update({...teamDetails}).then((value) => {
-                        resolve('success');
-                    }).catch((err) => reject('err'));;
-                });
-            })
-        })
+    updateTeamDetails(teamId: string, teamDetails: ITeams): Promise<string> {
+        if(Number(teamId) >= 0) {
+            return new Promise((resolve, reject) => {
+                const ref = this.db.database.ref('teams/teamDetails/').orderByChild('teamId').equalTo(teamId);
+                if(ref) {
+                    ref.once('value', (snapshot) => {
+                        if(snapshot.exists()) {
+                            snapshot.forEach((childSnapshot) => {
+                                const teamRef = childSnapshot.ref;
+                                teamRef.update({...teamDetails}).then((value) => {
+                                    resolve('success');
+                                }).catch((err) => reject('err'));
+                            });
+                        } else {
+                            const newNode = Number(teamId) - 1;
+                            const newRef = this.db.database.ref('teams/teamDetails/' + `${newNode}`);
+                            newRef.set({...teamDetails});
+                            resolve('success');
+                        }
+                    });
+                } else {
+                    reject('Error in Getting Reference');
+                }
+            });
+        } else {
+            Promise.reject('Team Id Should be greater than 0');
+        }
     }
 }

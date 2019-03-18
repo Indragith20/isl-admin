@@ -97,7 +97,7 @@ export class TeamDetailsComponent implements OnInit, OnDestroy {
       teamId: '',
       teamName: ''
     };
-    const updatedTeamDetails = this.teamDetailsFormArray.value;
+    const updatedTeamDetails = this.teamDetailsFormArray.getRawValue();
     updatedTeamDetails.map((teamDet) => {
       modifiedTeamObj = { ...modifiedTeamObj, ...teamDet };
     });
@@ -156,7 +156,6 @@ export class TeamDetailsComponent implements OnInit, OnDestroy {
       const workbook = XLSX.read(bstr, { type: 'binary' });
       const first_sheet_name = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[first_sheet_name];
-      console.log(XLSX.utils.sheet_to_json(worksheet, { raw: true }));
       this.formatTeamData(XLSX.utils.sheet_to_json(worksheet, { raw: true }));
     };
     fileReader.readAsArrayBuffer(this.file);
@@ -165,11 +164,26 @@ export class TeamDetailsComponent implements OnInit, OnDestroy {
   formatTeamData(teamData: Partial<ITeams[]>) {
     this.teamDetailsService.getLastAddedTeamId().then((data) => {
       let lastAddedTeamID = +data;
-      const formattedTeam = teamData.map((team) => {
+      const teamIds: number[] =  [];
+      const formattedTeam: ITeams[] = teamData.map((team) => {
         lastAddedTeamID = lastAddedTeamID + 1;
-        return { ...team, teamId: lastAddedTeamID };
+        teamIds.push(lastAddedTeamID);
+        return { ...team, teamId: String(lastAddedTeamID) };
       });
       console.log(formattedTeam);
+      const promiseResolved = teamIds.reduce((prev, current, index) => {
+        return prev.then(() => {
+          this.teamDetailsService.updateTeamDetails(String(current), formattedTeam[index]);
+        }).catch((err) => {
+          Promise.reject('err');
+        });
+      }, Promise.resolve());
+      // Possible Error Line.
+      promiseResolved.then((updated) => {
+        console.log(updated);
+      }).catch((err) => {
+        console.log(err);
+      });
     });
   }
 

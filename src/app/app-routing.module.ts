@@ -32,12 +32,13 @@ export const routes: Routes = [
   },
   { path: 'events/:id', component: EventsComponent, canActivate: [AuthGuardService] },
   { path: 'teams-dashboard',
-    component: TeamDashboardComponent,
+    /* component: TeamDashboardComponent,
     children: [
       { path: '', redirectTo: 'teams-list', pathMatch: 'full' },
       { path: 'teams-list', component: TeamListComponent },
       { path: 'teams-details', component: TeamDetailsComponent }
-    ],
+    ], */
+    loadChildren: './components/team-dashboard/team-dashboard.module#TeamsDashboardModule',
     canActivate: [AuthGuardService] }
   // {path: '**', redirectTo: 'login'}
 ];

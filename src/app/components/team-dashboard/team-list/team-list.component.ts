@@ -22,12 +22,17 @@ export class TeamListComponent implements OnInit {
       this.teams = teams;
     }).catch((err) => {
       console.log(err);
-    })
+    });
   }
 
   goToTeamDetails(team: ITeams) {
     this.teamDetailsService.setSelectedTeam(team);
     this.router.navigate(['../teams-details'], { queryParams: { action: TeamAction.EDIT_CONSTANTS }, relativeTo: this.route });
+  }
+
+  goToPlayerDetails(team: ITeams) {
+    this.teamDetailsService.setSelectedTeam(team);
+    this.router.navigate(['../player-list', team.teamId, team.teamName ], { relativeTo: this.route });
   }
 
   addNewTeam() {

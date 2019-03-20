@@ -11,10 +11,10 @@ import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-team-details',
-  templateUrl: './team-details.component.html',
-  styleUrls: ['./team-details.component.css']
+  templateUrl: './team-add-edit.component.html',
+  styleUrls: ['./team-add-edit.component.css']
 })
-export class TeamDetailsComponent implements OnInit, OnDestroy {
+export class TeamAddEditComponent implements OnInit, OnDestroy {
   teamDetails: ITeams;
   teamDetailsForm: FormGroup;
   editMode: boolean = false;

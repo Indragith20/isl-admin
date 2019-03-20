@@ -4,11 +4,11 @@
     </div>
     <div class="container" *ngIf="!loading">
       <mat-nav-list>
-        <mat-list-item *ngFor="let team of teams" class="team-list-style" (click)="goToTeamDetails(team)">
+        <mat-list-item *ngFor="let team of teams" class="team-list-style">
           <span class="col-md-6">{{team.teamName}}</span>
           <span class="col-md-6">
-            <button mat-button>Team Details ></button>
-            <button mat-button>Player Details ></button>
+            <button mat-button (click)="goToTeamDetails(team)">Team Details ></button>
+            <button mat-button (click)="goToPlayerDetails(team)">Player Details ></button>
           </span>
         </mat-list-item>
       </mat-nav-list>

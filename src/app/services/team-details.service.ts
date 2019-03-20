@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { ITeams } from '../interfaces/team-details.interface';
+import { IPlayerList } from '../interfaces/player-list.interface';
 
 @Injectable()
 export class TeamDetailsService {
@@ -75,5 +76,23 @@ export class TeamDetailsService {
         } else {
             Promise.reject('Team Id Should be greater than 0');
         }
+    }
+
+    getPlayerDetails(teamId: string): Promise<IPlayerList[] | string> {
+        return new Promise((resolve, reject) => {
+            const ref = this.db.database.ref('teamDetailsById/' + teamId);
+            if(ref) {
+                ref.once('value', (snapshot) => {
+                    if(snapshot.exists()) {
+                        const players = snapshot.val() ? snapshot.val().players : [];
+                        resolve(players);
+                    } else {
+                        reject('Error in getting Players');
+                    }
+                });
+            } else {
+                reject('Error in getting Players');
+            }
+        });
     }
 }

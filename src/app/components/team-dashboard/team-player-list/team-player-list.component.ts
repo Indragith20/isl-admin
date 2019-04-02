@@ -23,15 +23,34 @@ export class TeamPlayerListComponent implements OnInit, OnDestroy {
     });
   }
 
+  ngOnInit() {
+    this.playersList = [];
+  }
+
   getPlayers(teamId: string) {
     this.teamDetailsService.getPlayerDetails(teamId).then((data: IPlayerList[]) => {
-      this.playersList = data;
+      if(data && data.length) {
+        data.map((player) => {
+          if(player.player_id) {
+            this.playersList.push(player);
+          }
+        });
+      }
     }).catch((err) => {
       console.log(err);
     });
   }
 
-  ngOnInit() {
+  goToPlayerDetails(player: IPlayerList) {
+
+  }
+
+  deletePlayer(player: IPlayerList) {
+    this.teamDetailsService.deletePlayer(player.player_id, this.teamId).then((data) => {
+      console.log(data);
+    }).catch((err) => {
+      console.log(err);
+    });
   }
 
   ngOnDestroy() {

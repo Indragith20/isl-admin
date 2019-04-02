@@ -84,6 +84,7 @@ export class TeamDetailsService {
             if(ref) {
                 ref.once('value', (snapshot) => {
                     if(snapshot.exists()) {
+                        console.log(snapshot.val());
                         const players = snapshot.val() ? snapshot.val().players : [];
                         resolve(players);
                     } else {
@@ -93,6 +94,22 @@ export class TeamDetailsService {
             } else {
                 reject('Error in getting Players');
             }
+        });
+    }
+
+    deletePlayer(playerId: number, teamId: string) {
+        return new Promise((resolve, reject) => {
+            const ref = this.db.database.ref('teamDetailsById/' + teamId + '/players').orderByChild('player_id').equalTo(playerId);
+            ref.once('value', (snapshot) => {
+                if(snapshot.exists()) {
+                    snapshot.forEach((child) => {
+                        child.ref.remove();
+                    });
+                    resolve('success');
+                } else {
+                    reject('error');
+                }
+            });
         });
     }
 }

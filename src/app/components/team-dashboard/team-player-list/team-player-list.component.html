@@ -9,26 +9,36 @@
       </div>
     </div>
     <div class="margin-row-style">
-        <mat-nav-list>
-            <hr />
-            <mat-list-item>
-                <span class="col-md-3 text-center"><b>Jersey Number</b></span>
-                <span class="col-md-2 text-center"><b>Full Name</b></span>
-                <span class="col-md-3 text-center"><b>Position</b></span>
-                <span class="col-md-3 text-center"><b>Action</b></span>
-            </mat-list-item>
-            <hr />
-            <mat-list-item *ngFor="let player of playersList" class="player-list-style">
-              <span class="col-md-2 text-center imageDefaultStyle">
-                {{player.jersey_number}}
-            </div></span>
-              <span class="col-md-2 text-center">{{player.full_name}}</span>
-              <span class="col-md-2">{{player.position_name}}</span>
-              <span class="col-md-2">
-                <button mat-button (click)="goToPlayerDetails(team)">Edit Player ></button>
-              </span>
-            </mat-list-item>
-          </mat-nav-list>
+      <mat-nav-list>
+        <hr />
+        <mat-list-item>
+          <span class="col-md-3 text-center"><b>Jersey Number</b></span>
+          <span class="col-md-2 text-center"><b>Full Name</b></span>
+          <span class="col-md-3 text-center"><b>Position</b></span>
+          <span class="col-md-3 text-center"><b>Action</b></span>
+        </mat-list-item>
+        <hr />
+        <mat-list-item *ngFor="let player of playersList" class="player-list-style">
+          <div class="col-md-2 text-center">
+            <div class="imageDefaultStyle">
+              {{player.jersey_number}}
+            </div>
+          </div>
+          <span class="col-md-2 text-center">{{player.full_name}}</span>
+          <span class="col-md-2">{{player.position_name}}</span>
+          <span class="col-md-2">
+            <mat-chip-list>
+              <mat-chip>
+                <mat-icon color="primary">edit</mat-icon>
+              </mat-chip>
+              <mat-chip>
+                <mat-icon color="warn" (click)="deletePlayer(player)">delete</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+
+          </span>
+        </mat-list-item>
+      </mat-nav-list>
     </div>
   </ng-container>
 </div>

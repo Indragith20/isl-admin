@@ -7,8 +7,24 @@
     font-weight: bold;
 }
 
+.imageDefaultStyle {
+    background:url(../../../../assets/icons/Jersey_white.svg.png) no-repeat center;
+    background-size:cover;
+    text-align:center;
+    height: 40px;
+    width: 50px;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    display: inline-block;
+}
+
 ::ng-deep .mat-list-item-content {
     width: 100%;
     display: flex;
     justify-content: space-between;
+}
+
+::ng-deep .mat-chip {
+    cursor: pointer;
 }

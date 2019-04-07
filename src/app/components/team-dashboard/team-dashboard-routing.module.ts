@@ -4,14 +4,29 @@ import { TeamListComponent } from './team-list/team-list.component';
 import { TeamAddEditComponent } from './team-add-edit/team-add-edit.component';
 import { TeamPlayerAddEditComponent } from './team-player-add-edit/team-player-add-edit.component';
 import { TeamPlayerListComponent } from './team-player-list/team-player-list.component';
+import { TeamDashboardComponent } from './team-dashboard.component';
 
 
-const routes: Routes = [
+/* const routes: Routes = [
     { path: '', redirectTo: 'teams-list', pathMatch: 'full' },
     { path: 'teams-list', component: TeamListComponent },
     { path: 'teams-details', component: TeamAddEditComponent },
     { path: 'player-list/:teamId/:teamName', component: TeamPlayerListComponent },
     { path: 'player-add-edit/:playerName', component: TeamPlayerAddEditComponent }
+]; */
+
+const routes: Routes = [
+  {
+    path: '',
+    component: TeamDashboardComponent,
+    children: [
+      { path: '', redirectTo: 'teams-list', pathMatch: 'full' },
+      { path: 'teams-list', component: TeamListComponent },
+      { path: 'teams-details', component: TeamAddEditComponent },
+      { path: 'player-list/:teamId/:teamName', component: TeamPlayerListComponent },
+      { path: 'player-add-edit/:playerName', component: TeamPlayerAddEditComponent }
+    ]
+  }
 ];
 
 @NgModule({

@@ -9,6 +9,8 @@ import { TeamDetailsService } from 'src/app/services/team-details.service';
 import { TeamAddEditComponent } from './team-add-edit/team-add-edit.component';
 import { TeamPlayerListComponent } from './team-player-list/team-player-list.component';
 import { TeamPlayerAddEditComponent } from './team-player-add-edit/team-player-add-edit.component';
+import { LoadingSpinnerComponent } from 'src/app/shared/components/loading-spinner/loading-spinner.component';
+import { MatDialogModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -16,15 +18,17 @@ import { TeamPlayerAddEditComponent } from './team-player-add-edit/team-player-a
     MyOwnCustomMaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    TeamsDashboardRoutingModule
+    TeamsDashboardRoutingModule,
   ],
   declarations: [
     TeamDashboardComponent,
     TeamListComponent,
     TeamAddEditComponent,
     TeamPlayerListComponent,
-    TeamPlayerAddEditComponent
+    TeamPlayerAddEditComponent,
+    LoadingSpinnerComponent
   ],
+  entryComponents: [LoadingSpinnerComponent],
   providers: [TeamDetailsService],
   bootstrap: [TeamDashboardComponent]
 })

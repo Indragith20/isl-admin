@@ -17,7 +17,7 @@ export class AppService {
     private pageTitleSource = new BehaviorSubject<string>('ISL Admin');
     autheticated = this.autheticationSource.asObservable();
     pageTitle = this.pageTitleSource.asObservable();
-    
+
     token: string;
 
     constructor(private afAuth: AngularFireAuth,

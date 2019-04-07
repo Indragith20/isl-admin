@@ -103,18 +103,9 @@ export class TeamAddEditComponent implements OnInit, OnDestroy {
     });
     console.log(modifiedTeamObj);
     this.teamDetailsService.updateTeamDetails(modifiedTeamObj.teamId, modifiedTeamObj).then((data) => {
-      this.openSnackBar('Update Successfull', 'snackbar-success-style');
+      this.teamDetailsService.openSnackBar('Update Successfull', 'snackbar-success-style');
     }).catch((err) => {
-      this.openSnackBar('Not Updated', 'snackbar-error-style');
-    });
-  }
-
-  openSnackBar(message: string, className: string, action?: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-      panelClass: [className],
-      horizontalPosition: 'right',
-      verticalPosition: 'top'
+      this.teamDetailsService.openSnackBar('Not Updated', 'snackbar-error-style');
     });
   }
 

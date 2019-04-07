@@ -1,0 +1,52 @@
+.back-btn-style {
+    background-color: red;
+    color: white;
+}
+.edit-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.player-details-header-style {
+    margin: 10px;
+}
+
+.player-details-content-header-style {
+    margin: 10px;
+    max-height: 350px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.player-details-content-style {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    padding: 5px;
+    border-bottom: 1px solid lightblue;
+}
+
+.player-details-key-style {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    text-transform: capitalize;
+}
+
+.bottom-btn-style {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+::ng-deep .snackbar-error-style {
+    background-color: lightcoral;
+    color: black;
+}
+
+::ng-deep .snackbar-success-style {
+    background-color: lightgreen;
+    color: white;
+}

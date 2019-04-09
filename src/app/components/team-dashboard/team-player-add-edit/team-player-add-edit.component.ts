@@ -2,11 +2,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TeamDetailsService } from 'src/app/services/team-details.service';
 import { IPlayerList } from 'src/app/interfaces/player-list.interface';
 import { MatSnackBar, MatDialog } from '@angular/material';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TeamAction } from 'src/app/shared/constants/questions';
 import { ITeams } from 'src/app/interfaces/team-details.interface';
+import { firestore } from 'firebase/app';
+
 
 @Component({
   selector: 'app-team-player-add-edit',
@@ -36,9 +38,7 @@ export class TeamPlayerAddEditComponent implements OnInit, OnDestroy {
     this.selectedTeam = this.teamDetailsService.selectedTeam ? this.teamDetailsService.selectedTeam : null;
     this.playerDetailsForm = this.fb.group({});
     if(action === TeamAction.ADD_CONSTANTS) {
-      // this.teamDetailsService.getLastAddedTeamId().then((data) => {
-      //   this.createNewTeam(+data);
-      // });
+      this.createNewPlayer();
     } else if(action === TeamAction.EDIT_CONSTANTS) {
       this.player = this.teamDetailsService.selectedPlayer ? this.teamDetailsService.selectedPlayer : null;
       if(this.player) {
@@ -49,6 +49,41 @@ export class TeamPlayerAddEditComponent implements OnInit, OnDestroy {
     } else {
       this.loading = false;
     }
+  }
+
+  createNewPlayer() {
+    const ts = firestore.Timestamp;
+    const uniqueId = ts.now().toMillis() + '_' + Math.random().toString(36).substr(2, 9);
+    const newPlayerId = uniqueId;
+    const newTeamArrayConstants = ['player_id',
+      'full_name',
+      'short_name',
+      'is_captain',
+      'is_marque',
+      'position_id',
+      'position_name',
+      'jersey_number',
+      'country_id',
+      'country_name',
+      'gender',
+      'jersey_no',
+      'website',
+      'facebook',
+      'twitter',
+      'google_plus',
+      'instagram',
+    ];
+    newTeamArrayConstants.map((playerKey) => {
+      this.playerDetailsForm.addControl(playerKey, new FormControl(''));
+      if (playerKey === 'player_id' || playerKey === 'Country_id' || playerKey === 'Position_id') {
+        this.playerDetailsForm.get(playerKey).setValue(newPlayerId);
+        this.playerDetailsForm.get(playerKey).disable();
+      }
+      this.formProperties.push(playerKey);
+    });
+    console.log(this.playerDetailsForm);
+    this.editMode = true;
+    this.loading = false;
   }
 
   createForm() {

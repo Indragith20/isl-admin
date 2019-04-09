@@ -1,8 +1,12 @@
 <div class="container">
-  <ng-container *ngIf="!loading">
+  <ng-container *ngIf="!(loading | async)">
     <div class="row margin-row-style">
       <div class="col-md-2">
         <button mat-raised-button color="warn" (click)="backToTeamDetails()">Back</button>
+      </div>
+      <div class="col-md-8"></div>
+      <div class="col-md-2">
+        <button mat-raised-button color="success" (click)="addNewPlayer()"> + Add New Player</button>
       </div>
     </div>
     <div class="margin-row-style">

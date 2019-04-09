@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TeamDetailsService } from 'src/app/services/team-details.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { IPlayerList } from 'src/app/interfaces/player-list.interface';
 import { TeamAction } from 'src/app/shared/constants/questions';
 
@@ -15,17 +15,19 @@ export class TeamPlayerListComponent implements OnInit, OnDestroy {
   teamId: string;
   teamName: string;
   playersList: IPlayerList[];
+  loading: Observable<boolean>;
 
   constructor(private teamDetailsService: TeamDetailsService, private route: ActivatedRoute, private router: Router) {
+  }
+
+  ngOnInit() {
+    this.playersList = [];
     this.routeSubscription = this.route.params.subscribe((params) => {
       this.teamId = params['teamId'];
       this.teamName = params['teamName'];
       this.getPlayers(this.teamId);
     });
-  }
-
-  ngOnInit() {
-    this.playersList = [];
+    this.loading = this.teamDetailsService.loading;
   }
 
   getPlayers(teamId: string) {
@@ -40,6 +42,11 @@ export class TeamPlayerListComponent implements OnInit, OnDestroy {
     }).catch((err) => {
       console.log(err);
     });
+  }
+
+  addNewPlayer() {
+    this.router.navigate(['../../../player-add-edit/new'],
+      { queryParams: { action: TeamAction.ADD_CONSTANTS }, relativeTo: this.route });
   }
 
   goToPlayerDetails(player: IPlayerList) {

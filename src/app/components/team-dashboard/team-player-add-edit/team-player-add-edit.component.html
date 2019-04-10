@@ -19,7 +19,7 @@
     <ng-container [formGroup]="playerDetailsForm">
       <div class="col-md-12 player-details-content-style" *ngFor="let property of formProperties; let i = index">
         <div class="col-md-4 player-details-key-style">
-            {{property}}
+            {{property | keycapitalize}}
           </div>
           <div class="col-md-8" *ngIf="!editMode">
             {{playerDetailsForm.get(property).value}}

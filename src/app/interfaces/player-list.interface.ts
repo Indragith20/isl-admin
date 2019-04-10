@@ -1,5 +1,6 @@
 export interface IPlayerList {
-    player_id?: number;
+    // TODO: Modify the type to string
+    player_id?: any;
     full_name?: string;
     short_name?: string;
     is_captain?: number;

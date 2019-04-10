@@ -4,12 +4,13 @@ import { ITeams } from '../interfaces/team-details.interface';
 import { IPlayerList } from '../interfaces/player-list.interface';
 import { MatSnackBar } from '@angular/material';
 import { BehaviorSubject } from 'rxjs';
+import { firestore } from 'firebase/app';
 
 @Injectable()
 export class TeamDetailsService {
     selectedTeam: ITeams;
     selectedPlayer: IPlayerList;
-    private loadingSource = new BehaviorSubject(false);
+    loadingSource = new BehaviorSubject(false);
     loading = this.loadingSource.asObservable();
 
     constructor(private db: AngularFireDatabase, private snackBar: MatSnackBar) {}
@@ -111,9 +112,17 @@ export class TeamDetailsService {
                 ref.once('value', (snapshot) => {
                     if(snapshot.exists()) {
                         console.log(snapshot.val());
-                        const players = snapshot.val() ? snapshot.val().players : [];
+                        let resolvedPlayers = [];
+                        if(snapshot.val()) {
+                            const players = snapshot.val().players;
+                            if(Array.isArray(players)) {
+                                resolvedPlayers = [...players];
+                            } else {
+                                resolvedPlayers = this.mapObjectToArray(players);
+                            }
+                        }
                         this.loadingSource.next(false);
-                        resolve(players);
+                        resolve(resolvedPlayers);
                     } else {
                         this.loadingSource.next(false);
                         reject('Error in getting Players');
@@ -144,13 +153,13 @@ export class TeamDetailsService {
                                 reject('err');
                             });
                         });
+                    } else {
+                        const newNode = playerDetails.player_id;
+                        const newRef = this.db.database.ref('teamDetailsById/' + teamId + '/players/' + `${newNode}`);
+                        newRef.set({...playerDetails});
+                        this.loadingSource.next(false);
+                        resolve('success');
                     }
-                    //  else {
-                    //     const newNode = Number(teamId) - 1;
-                    //     const newRef = this.db.database.ref('teams/teamDetails/' + `${newNode}`);
-                    //     newRef.set({...playerDetails});
-                    //     resolve('success');
-                    // }
                 });
             } else {
                 this.loadingSource.next(false);
@@ -185,5 +194,19 @@ export class TeamDetailsService {
           horizontalPosition: 'right',
           verticalPosition: 'top'
         });
+    }
+
+    mapObjectToArray(playerObjects) {
+        const arrayToBeReturned = [];
+        Object.keys(playerObjects).map((uniqueKey) => {
+            arrayToBeReturned.push(playerObjects[uniqueKey]);
+        });
+        return arrayToBeReturned;
+    }
+
+    getUniqueId(): string {
+        const ts = firestore.Timestamp;
+        const uniqueId = ts.now().toMillis() + '_' + Math.random().toString(36).substr(2, 9);
+        return uniqueId;
     }
 }

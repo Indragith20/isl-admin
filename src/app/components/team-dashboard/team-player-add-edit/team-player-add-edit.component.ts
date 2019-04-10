@@ -7,7 +7,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TeamAction } from 'src/app/shared/constants/questions';
 import { ITeams } from 'src/app/interfaces/team-details.interface';
-import { firestore } from 'firebase/app';
 
 
 @Component({
@@ -52,8 +51,7 @@ export class TeamPlayerAddEditComponent implements OnInit, OnDestroy {
   }
 
   createNewPlayer() {
-    const ts = firestore.Timestamp;
-    const uniqueId = ts.now().toMillis() + '_' + Math.random().toString(36).substr(2, 9);
+    const uniqueId = this.teamDetailsService.getUniqueId();
     const newPlayerId = uniqueId;
     const newTeamArrayConstants = ['player_id',
       'full_name',
@@ -101,10 +99,8 @@ export class TeamPlayerAddEditComponent implements OnInit, OnDestroy {
     this.loading = true;
     const modifiedPlayerDetails: IPlayerList = this.playerDetailsForm.getRawValue();
     this.teamDetailsService.updatePlayerDetails(this.selectedTeam.teamId, modifiedPlayerDetails).then((data) => {
-        this.loading = false;
         this.teamDetailsService.openSnackBar('Update Successfull', 'snackbar-success-style');
       }).catch((err) => {
-        this.loading = false;
         this.teamDetailsService.openSnackBar('Not Updated', 'snackbar-error-style');
       });
   }

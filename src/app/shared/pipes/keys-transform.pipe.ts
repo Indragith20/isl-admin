@@ -1,9 +1,9 @@
-import { Injectable, Pipe } from '@angular/core';
+import { Injectable, Pipe, PipeTransform } from '@angular/core';
 @Pipe({
    name: 'keyobject'
 })
 @Injectable()
-export class Keyobject {
+export class Keyobject implements PipeTransform {
 
 transform(value, args:string[]):any {
     let keys = [];

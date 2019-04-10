@@ -10,7 +10,7 @@ import { TeamAddEditComponent } from './team-add-edit/team-add-edit.component';
 import { TeamPlayerListComponent } from './team-player-list/team-player-list.component';
 import { TeamPlayerAddEditComponent } from './team-player-add-edit/team-player-add-edit.component';
 import { LoadingSpinnerComponent } from 'src/app/shared/components/loading-spinner/loading-spinner.component';
-import { MatDialogModule } from '@angular/material';
+import { KeyCapitalize } from 'src/app/shared/pipes/key-capitalize.pipe';
 
 @NgModule({
   imports: [
@@ -26,7 +26,8 @@ import { MatDialogModule } from '@angular/material';
     TeamAddEditComponent,
     TeamPlayerListComponent,
     TeamPlayerAddEditComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    KeyCapitalize
   ],
   entryComponents: [LoadingSpinnerComponent],
   providers: [TeamDetailsService],
